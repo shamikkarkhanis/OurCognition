@@ -10,7 +10,7 @@ const Navbar = ({ setSelection }) => {
 
     return (
         <nav style={styles.navbar}>
-            <div>
+            <div style={styles.buttonContainer}>
                 <button
                     onClick={() => handleSelection("alzheimers")}
                     style={
@@ -69,11 +69,16 @@ const Navbar = ({ setSelection }) => {
 const styles = {
     navbar: {
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "center", // Center the button container
         alignItems: "center",
         padding: "10px 20px",
         backgroundColor: "#1c1c1e", // Dark background color
         borderRadius: "10px",
+    },
+    buttonContainer: {
+        display: "flex",
+        justifyContent: "space-around", // Space buttons equally
+        width: "100%", // Ensure the container takes full width
     },
     link: {
         textDecoration: "none",

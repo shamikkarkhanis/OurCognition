@@ -5,131 +5,144 @@ import React, { useState } from 'react';
 const Timeline = ({ selection, triggerUndulation }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const anxiety_events = [
-        {
-            title: 'Introduction to Anxiety',
-            description: 'Anxiety is a complex emotional and physiological response that affects multiple brain regions and bodily systems.',
-            brain_region: ['hypothalamus', 'amygdala', 'pfc', 'basal-ganglia', 'brainstem'],
-            details: [
-                'Anxiety involves interconnected neural circuits throughout the brain.',
-                'Both emotional and physical symptoms manifest during anxiety.',
-                'Understanding anxiety\'s effects helps develop better coping strategies.'
-            ]
-        },
-        {
-            title: 'Increased Cortisol Levels',
-            description: 'Anxiety leads to elevated cortisol levels, which can impair cognitive functions and memory retrieval.',
-            brain_region: ['hypothalamus'], // Converted to array
-            details: [
-                'The hypothalamus activates the hypothalamic-pituitary-adrenal (HPA) axis.',
-                'The HPA axis releases cortisol in response to stress.',
-                'Chronic cortisol elevation damages the hippocampus, impairing learning and memory.'
-            ]
-        },
-        {
-            title: 'Heightened Amygdala Activity',
-            description: 'Anxiety activates the amygdala, increasing emotional responses and potentially hindering rational thought.',
-            brain_region: ['amygdala'], // Converted to array
-            details: [
-                'The amygdala is the brain’s fear center, responsible for detecting threats.',
-                'Hyperactivity in the amygdala amplifies fear and emotional responses.',
-                'Overwhelms regulatory systems like the prefrontal cortex, leading to emotional dysregulation.'
-            ]
-        },
-        {
-            title: 'Reduced Prefrontal Cortex Function',
-            description: 'Anxiety can diminish the functioning of the prefrontal cortex, affecting decision-making and impulse control.',
-            brain_region: ['pfc'], // Converted to array
-            details: [
-                'The prefrontal cortex regulates rational thinking and top-down emotional control.',
-                'In anxiety, the PFC’s diminished function reduces its ability to moderate the amygdala.',
-                'Leads to impaired decision-making and difficulty controlling impulsive behaviors.'
-            ]
-        },
-        {
-            title: 'Altered Neurotransmitter Balance',
-            description: 'Anxiety disrupts the balance of neurotransmitters like serotonin and dopamine, impacting mood and cognition.',
-            brain_region: ['basal-ganglia'], // Converted to array
-            details: [
-                'The basal ganglia play a role in mood regulation and motor control.',
-                'Imbalances in neurotransmitters like dopamine and serotonin cause mood instability.',
-                'Contributes to repetitive or compulsive behaviors seen in anxiety.'
-            ]
-        },
-        {
-            title: 'Increased Heart Rate and Blood Pressure',
-            description: 'Physical symptoms of anxiety, such as increased heart rate, can distract from cognitive tasks and impair focus.',
-            brain_region: ['brainstem'], // Converted to array
-            details: [
-                'The brainstem controls autonomic functions like heart rate and blood pressure.',
-                'Anxiety activates the sympathetic nervous system, causing physical arousal.',
-                'Leads to heightened heart rate, increased blood pressure, and difficulty focusing.'
-            ]
-        }
-    ];
-
     const alzheimers_events = [
         {
-            title: 'Introduction to Alzheimer\'s Disease',
-            description: 'Alzheimer\'s is a progressive neurodegenerative disorder that gradually destroys memory and cognitive function.',
-            brain_region: ['hippocampus'], // Multiple regions affected initially
+            title: "Introduction to Alzheimer's Disease",
+            description: "Alzheimer's is a progressive neurodegenerative disorder that gradually destroys memory and cognitive function.",
+            brain_region: ['hippocampus'],
             details: [
-                'Alzheimer\'s disease is characterized by the buildup of abnormal protein deposits in the brain.',
-                'Beta-amyloid plaques and tau tangles accumulate, leading to neuron death and brain tissue loss.',
-                'The disease typically begins in memory centers before spreading to other brain regions.'
+                'Beta-amyloid plaques → tau tangles → neuron death.',
+                'Neuron loss → brain tissue shrinkage in affected areas.',
+                'Starts in memory centers (e.g., hippocampus) → spreads to other regions.'
             ]
         },
         {
             title: 'Memory Loss',
-            description: 'One of the most common early signs of Alzheimer’s is forgetting recently learned information.',
-            brain_region: ['hippocampus'], // Converted to array
+            description: 'Forgetting recently learned information is one of the earliest symptoms of Alzheimer’s.',
+            brain_region: ['hippocampus'],
             details: [
-                'The hippocampus is the primary area responsible for forming new memories.',
-                'Alzheimer’s begins by damaging the hippocampus, impairing the ability to retain recently learned information.',
-                'As the disease progresses, the damage spreads, further affecting memory consolidation.'
+                'Hippocampus → forms and consolidates new memories.',
+                'Plaques and tangles → hippocampus damage → impaired short-term memory.',
+                'Progression → widespread memory loss across the brain.'
             ]
         },
         {
             title: 'Difficulty Planning or Solving Problems',
-            description: 'People with Alzheimer’s may experience changes in their ability to develop and follow a plan or work with numbers.',
-            brain_region: ['pfc'], // Converted to array
+            description: 'Alzheimer’s impairs higher-order cognitive functions like planning and problem-solving.',
+            brain_region: ['pfc'],
             details: [
-                'The prefrontal cortex is responsible for higher-order cognitive functions like planning and problem-solving.',
-                'Alzheimer’s disrupts connections in this region, making it harder to organize thoughts or manage complex tasks.',
-                'This leads to difficulty handling numbers or following step-by-step instructions.'
+                'PFC → manages reasoning, planning, and organization.',
+                'Disrupted PFC connections → poor task management → difficulty solving problems.',
+                'Symptoms → trouble handling numbers, following steps, or making decisions.'
             ]
         },
         {
             title: 'Confusion with Time or Place',
-            description: 'Alzheimer’s can cause individuals to lose track of dates, seasons, and the passage of time.',
-            brain_region: ['parietal-lobe'], // Converted to array
+            description: 'Individuals lose track of time, dates, or familiar locations as Alzheimer’s progresses.',
+            brain_region: ['parietal-lobe'],
             details: [
-                'The parietal lobe helps process spatial awareness and orientation in time and space.',
-                'Damage to this region leads to disorientation and confusion regarding time and place.',
-                'Individuals may struggle to recognize familiar environments or understand the current context.'
+                'Parietal lobe → processes spatial awareness and temporal orientation.',
+                'Damage → disorientation → confusion about current events and surroundings.',
+                'Symptoms → difficulty recognizing familiar places or navigating environments.'
             ]
         },
         {
             title: 'Challenges in Completing Familiar Tasks',
-            description: 'Individuals may find it hard to complete daily tasks, such as driving to a familiar location or managing a budget.',
-            brain_region: ['temporal-lobe', 'parietal-lobe'], // Converted to array
+            description: 'Daily tasks, such as managing a budget or driving, become increasingly difficult.',
+            brain_region: ['temporal-lobe', 'parietal-lobe'],
             details: [
-                'The temporal lobe is involved in understanding and processing sensory information, such as language and memory.',
-                'The parietal lobe contributes to motor planning and spatial reasoning.',
-                'Alzheimer’s disrupts these functions, causing difficulty in performing familiar or routine tasks.'
+                'Temporal lobe → processes sensory input, language, and memory.',
+                'Parietal lobe → coordinates spatial reasoning and motor planning.',
+                'Alzheimer’s disrupts these areas → difficulty with routine and familiar activities.'
             ]
         },
         {
             title: 'Changes in Mood and Personality',
-            description: 'Alzheimer’s can lead to mood swings and changes in personality, making individuals more confused, suspicious, or anxious.',
-            brain_region: ['amygdala', 'pfc'], // Converted to array
+            description: 'Alzheimer’s leads to mood swings and personality changes, such as anxiety or suspicion.',
+            brain_region: ['amygdala', 'pfc'],
             details: [
-                'The amygdala regulates emotions and is often affected by Alzheimer’s, leading to heightened anxiety or suspicion.',
-                'The prefrontal cortex’s dysfunction exacerbates mood swings and reduces emotional control.',
-                'These changes make individuals more irritable, withdrawn, or confused.'
+                'Amygdala → emotional regulation → damage → heightened anxiety and irritability.',
+                'PFC dysfunction → reduced emotional control → unpredictable mood swings.',
+                'Behavioral changes → confusion, withdrawal, or suspicion toward others.'
             ]
         }
     ];
+
+
+    const anxiety_events = [
+        {
+            title: 'Introduction to Anxiety',
+            description: 'Anxiety is a complex emotional and physiological response affecting multiple brain regions and systems.',
+            brain_region: ['hypothalamus', 'amygdala', 'pfc', 'basal-ganglia', 'brainstem'],
+            details: [
+                'Interconnected neural circuits → heightened arousal, worry, and vigilance.',
+                'Cognitive effects → poor focus, memory issues, and impaired decision-making.',
+                'Understanding anxiety → better coping strategies and treatments.'
+            ]
+        },
+        {
+            title: 'Increased Cortisol Levels',
+            description: 'Anxiety elevates cortisol, impairing cognitive functions like attention and memory.',
+            brain_region: ['hypothalamus'],
+            details: [
+                'Hypothalamus → HPA axis → cortisol release.',
+                'Chronic cortisol → hippocampus damage → impaired memory.',
+                'Excess cortisol → prefrontal cortex disruption → poor concentration.'
+            ]
+        },
+        {
+            title: 'Heightened Amygdala Activity',
+            description: 'Anxiety activates the amygdala, amplifying fear and emotional responses.',
+            brain_region: ['amygdala'],
+            details: [
+                'Amygdala → processes threats → initiates fight-or-flight.',
+                'Hyperactivity → exaggerated fear → reduced prefrontal cortex control.',
+                'Weakened regulation → emotional dysregulation and avoidance behaviors.'
+            ]
+        },
+        {
+            title: 'Reduced Prefrontal Cortex Function',
+            description: 'Anxiety diminishes the prefrontal cortex, impairing reasoning and self-control.',
+            brain_region: ['pfc'],
+            details: [
+                'PFC → rational thinking and emotional regulation.',
+                'Reduced PFC → weaker control over amygdala → heightened reactivity.',
+                'Impaired focus → poor problem-solving and decision-making.'
+            ]
+        },
+        {
+            title: 'Altered Neurotransmitter Balance',
+            description: 'Anxiety disrupts serotonin, dopamine, and GABA levels, affecting mood and cognition.',
+            brain_region: ['basal-ganglia'],
+            details: [
+                'Basal ganglia → mood regulation and habits.',
+                'Low serotonin → irritability and emotional instability.',
+                'Dopamine imbalance → reduced motivation and pleasure.',
+                'Low GABA → increased neural excitability → heightened anxiety.'
+            ]
+        },
+        {
+            title: 'Increased Heart Rate and Blood Pressure',
+            description: 'Physical symptoms of anxiety impair cognitive focus and increase fatigue.',
+            brain_region: ['brainstem'],
+            details: [
+                'Brainstem → autonomic functions (e.g., heart rate, blood pressure).',
+                'Sympathetic nervous system → physical arousal (e.g., rapid heartbeat).',
+                'Chronic activation → reduced oxygen to brain → poor focus and clarity.'
+            ]
+        },
+        {
+            title: 'Disrupted Sleep Patterns',
+            description: 'Anxiety leads to poor sleep, worsening cognitive and emotional regulation.',
+            brain_region: ['thalamus', 'brainstem'],
+            details: [
+                'Thalamus/brainstem → regulate sleep-wake cycles.',
+                'Anxiety → fragmented sleep → impaired memory and focus.',
+                'Sleep disruption → worsened emotional regulation and stress.'
+            ]
+        }
+    ];
+
 
     const depression_events = [
         {
@@ -207,188 +220,190 @@ const Timeline = ({ selection, triggerUndulation }) => {
     const bipolar_events = [
         {
             title: 'Introduction to Bipolar Disorder',
-            description: 'Bipolar disorder is a mental health condition characterized by extreme mood swings, including episodes of mania and depression.',
+            description: 'Bipolar disorder is marked by extreme mood swings, including episodes of mania and depression.',
             brain_region: ['pfc', 'amygdala', 'hippocampus', 'basal-ganglia'],
             details: [
-                'Bipolar disorder involves dysregulation of mood, energy, and cognition.',
-                'It alternates between depressive and manic phases, impacting multiple brain regions.',
-                'Understanding these changes can help improve treatments and therapies.'
+                'Dysregulation of mood → affects energy, cognition, and behavior.',
+                'Alternates between depression and mania → impacts multiple brain regions.',
+                'Understanding mechanisms → improves therapies.'
             ]
         },
         {
             title: 'Reduced Prefrontal Cortex Function in Depressive States',
-            description: 'During depressive episodes, reduced activity in the prefrontal cortex impairs decision-making and impulse control.',
+            description: 'Depressive episodes impair the PFC, affecting decision-making and emotion regulation.',
             brain_region: ['pfc'],
             details: [
-                'The prefrontal cortex governs executive functions like planning and regulating emotions.',
-                'Depressive states diminish the PFC’s ability to manage emotional stress.',
-                'This leads to indecisiveness, impaired focus, and a sense of hopelessness.'
+                'PFC → regulates planning, focus, and emotion control.',
+                'Depressive states → reduced PFC activity → impaired decision-making.',
+                'Leads to indecisiveness, hopelessness, and difficulty focusing.'
             ]
         },
         {
             title: 'Increased Amygdala Activity in Manic States',
-            description: 'During manic episodes, hyperactivity in the amygdala heightens emotional reactivity and impulsivity.',
+            description: 'Manic episodes heighten amygdala activity, increasing impulsivity and emotional reactivity.',
             brain_region: ['amygdala'],
             details: [
-                'The amygdala processes emotional stimuli and reactions.',
-                'Overactivation during mania results in heightened emotions and impulsive behaviors.',
-                'This can contribute to risky actions and difficulty regulating emotions.'
+                'Amygdala → processes emotional stimuli and reactions.',
+                'Hyperactivity → heightened emotions → impulsive behaviors.',
+                'Contributes to risky actions and difficulty regulating emotions.'
             ]
         },
         {
             title: 'Hippocampal Changes and Mood Dysregulation',
-            description: 'Bipolar disorder is associated with structural and functional changes in the hippocampus.',
+            description: 'Structural and functional changes in the hippocampus disrupt mood regulation.',
             brain_region: ['hippocampus'],
             details: [
-                'The hippocampus is vital for memory and emotional regulation.',
-                'In bipolar disorder, hippocampal atrophy can impair memory and emotional control.',
-                'These changes are linked to both manic and depressive episodes.'
+                'Hippocampus → governs memory and emotional control.',
+                'Bipolar disorder → hippocampal atrophy → impaired regulation.',
+                'Linked to memory loss during depressive and manic episodes.'
             ]
         },
         {
             title: 'Altered Neurotransmitter Activity',
-            description: 'Bipolar disorder disrupts neurotransmitter balance, affecting mood, energy, and motivation.',
+            description: 'Neurotransmitter imbalances affect mood, energy, and behavior in bipolar disorder.',
             brain_region: ['basal-ganglia'],
             details: [
-                'The basal ganglia regulate mood and reward processing.',
-                'Dysregulated dopamine and serotonin levels contribute to mood instability.',
-                'High dopamine levels during mania and low levels during depression affect behavior.'
+                'Basal ganglia → regulate mood and reward processing.',
+                'Mania → high dopamine levels; depression → low dopamine levels.',
+                'Dysregulation → mood instability and behavioral shifts.'
             ]
         },
         {
             title: 'Irregular Circadian Rhythms',
-            description: 'Bipolar disorder often disrupts sleep and circadian rhythms, exacerbating mood swings.',
+            description: 'Disrupted sleep patterns worsen mood swings in bipolar disorder.',
             brain_region: ['hypothalamus'],
             details: [
-                'The hypothalamus controls sleep-wake cycles and circadian rhythms.',
-                'Disrupted rhythms contribute to insomnia or hypersomnia during episodes.',
-                'Stabilizing circadian rhythms can help manage mood swings in bipolar disorder.'
+                'Hypothalamus → controls sleep-wake cycles and circadian rhythms.',
+                'Disruptions → insomnia or hypersomnia → exacerbates mood episodes.',
+                'Stabilizing sleep rhythms → helps manage symptoms.'
             ]
         },
         {
             title: 'Connectivity Imbalances in Neural Networks',
-            description: 'Bipolar disorder alters connectivity between key brain regions, impacting emotional regulation and cognition.',
+            description: 'Impaired connectivity between brain regions impacts emotional regulation.',
             brain_region: ['pfc', 'amygdala', 'hippocampus'],
             details: [
-                'Imbalanced connectivity leads to poor regulation of emotions and mood.',
-                'This imbalance is more pronounced during manic or depressive episodes.',
-                'Improving neural connectivity is a focus of many therapeutic interventions.'
+                'Poor connectivity → reduced control over mood and emotions.',
+                'Manic/depressive episodes → worsen imbalances in connectivity.',
+                'Therapies → focus on restoring neural communication.'
             ]
         },
         {
             title: 'Heightened Risk of Stress-Induced Episodes',
-            description: 'Bipolar disorder increases susceptibility to stress, which can trigger manic or depressive episodes.',
+            description: 'Stress increases vulnerability to manic or depressive episodes in bipolar disorder.',
             brain_region: ['hypothalamus', 'amygdala'],
             details: [
-                'Stress activates the hypothalamic-pituitary-adrenal (HPA) axis.',
-                'The amygdala’s heightened activity amplifies stress responses during episodes.',
-                'Stress management techniques are crucial for stabilizing mood.'
+                'Stress → activates hypothalamic-pituitary-adrenal (HPA) axis.',
+                'HPA activation → amygdala hyperactivity → amplifies stress responses.',
+                'Stress management → essential for stabilizing mood.'
             ]
         }
     ];
 
-    const filler_events = [
-        {
-            title: 'Blank',
-            description: 'kljadsfl;kjasdfl;kajsdfl;',
-            brain_region: ['hypothalamus', 'amygdala', 'pfc', 'basal-ganglia', 'brainstem'],
-            details: [
-                'lkjsadflkjsdf',
-                'kljsdlakfjlkajsdf',
-                'kljasdlfkjasdf'
-            ]
-        }
-    ];
 
     const schizophrenia_events = [
         {
             title: 'Introduction to Schizophrenia',
-            description: 'Schizophrenia is a chronic brain disorder characterized by delusions, hallucinations, and cognitive impairments.',
+            description: 'Schizophrenia is a chronic brain disorder causing delusions, hallucinations, and cognitive impairments.',
             brain_region: ['pfc', 'amygdala', 'hippocampus', 'basal-ganglia', 'thalamus'],
             details: [
-                'Schizophrenia involves disrupted brain signaling and neurotransmitter imbalances.',
-                'Symptoms can include both positive (hallucinations) and negative (reduced emotional expression) aspects.',
-                'Understanding the affected brain regions helps develop targeted treatments.'
+                'Disrupted brain signaling → neurotransmitter imbalances.',
+                'Positive symptoms (hallucinations) → negative symptoms (reduced emotional expression).',
+                'Focus on affected brain regions → targeted treatments.'
             ]
         },
         {
             title: 'Reduced Prefrontal Cortex Activity',
-            description: 'Decreased activity in the prefrontal cortex contributes to cognitive and executive function deficits.',
+            description: 'Decreased activity in the prefrontal cortex impairs cognitive and executive functions.',
             brain_region: ['pfc'],
             details: [
-                'The prefrontal cortex is crucial for decision-making, planning, and rational thought.',
-                'Hypofrontality is a hallmark of schizophrenia, leading to impaired problem-solving.',
-                'This underactivity contributes to disorganized thoughts and difficulty focusing.'
+                'PFC governs decision-making → planning and rational thought.',
+                'Hypofrontality → disorganized thoughts + impaired focus.',
+                'Underactivity → difficulty solving problems.'
             ]
         },
         {
             title: 'Hyperactivity in the Amygdala',
-            description: 'Hyperactivity in the amygdala contributes to paranoia and emotional dysregulation in schizophrenia.',
+            description: 'Amygdala hyperactivity → paranoia + emotional dysregulation.',
             brain_region: ['amygdala'],
             details: [
-                'The amygdala plays a key role in processing emotions and detecting threats.',
-                'In schizophrenia, overactivation can lead to heightened fear and suspicion.',
-                'This contributes to paranoia and exaggerated emotional reactions.'
+                'Processes emotions + threat detection → heightened fear.',
+                'Overactivation → suspicion + exaggerated reactions.',
+                'Contributes to paranoia symptoms.'
             ]
         },
         {
             title: 'Hippocampal Atrophy and Memory Impairments',
-            description: 'Schizophrenia is associated with structural changes in the hippocampus, affecting memory and learning.',
+            description: 'Structural changes in the hippocampus impair memory and learning.',
             brain_region: ['hippocampus'],
             details: [
-                'The hippocampus is involved in memory formation and spatial navigation.',
-                'Atrophy in this region disrupts the ability to form and recall memories.',
-                'These changes are linked to the cognitive symptoms of schizophrenia.'
+                'Hippocampus forms + recalls memories → spatial navigation.',
+                'Atrophy → disrupted memory formation.',
+                'Linked to cognitive deficits in schizophrenia.'
             ]
         },
         {
             title: 'Basal Ganglia Dysregulation',
-            description: 'Dysfunction in the basal ganglia affects motor function and contributes to repetitive behaviors.',
+            description: 'Basal ganglia dysfunction → motor issues + repetitive behaviors.',
             brain_region: ['basal-ganglia'],
             details: [
-                'The basal ganglia help regulate motor control and reward processing.',
-                'Dysregulation can lead to motor abnormalities such as catatonia.',
-                'Also associated with repetitive behaviors and difficulty initiating actions.'
+                'Regulates motor control → reward processing.',
+                'Dysregulation → motor abnormalities (e.g., catatonia).',
+                'Contributes to repetitive actions + initiation challenges.'
             ]
         },
         {
             title: 'Disrupted Thalamic Connectivity',
-            description: 'The thalamus, a sensory relay center, shows altered connectivity in schizophrenia, affecting perception.',
+            description: 'Thalamus connectivity changes → sensory distortions + hallucinations.',
             brain_region: ['thalamus'],
             details: [
-                'The thalamus integrates and relays sensory information to the cortex.',
-                'Disrupted connectivity leads to sensory distortions and hallucinations.',
-                'This may contribute to the positive symptoms of schizophrenia, like delusions.'
+                'Thalamus relays sensory input → cortex integration.',
+                'Disruptions → distorted perception → hallucinations.',
+                'Linked to positive symptoms like delusions.'
             ]
         },
         {
             title: 'Imbalance in Dopamine Transmission',
-            description: 'Schizophrenia involves overactivity of dopamine pathways, particularly in the mesolimbic system.',
+            description: 'Dopamine overactivity in the mesolimbic pathway drives positive symptoms.',
             brain_region: ['pfc', 'basal-ganglia', 'amygdala'],
             details: [
-                'Excessive dopamine activity in the mesolimbic pathway is linked to hallucinations and delusions.',
-                'Reduced dopamine in the prefrontal cortex contributes to cognitive deficits.',
-                'Balancing dopamine levels is a key focus of antipsychotic treatments.'
+                'Excess dopamine → hallucinations + delusions.',
+                'Low dopamine in PFC → cognitive deficits.',
+                'Antipsychotic treatments target dopamine balance.'
             ]
         },
         {
-            title: 'Disrupted Default Mode Network',
-            description: 'Schizophrenia affects the default mode network (DMN), disrupting self-referential thought processes.',
+            title: 'Disrupted Default Mode Network (DMN)',
+            description: 'Schizophrenia affects the DMN, impairing self-referential thought.',
             brain_region: ['pfc', 'hippocampus'],
             details: [
-                'The DMN is active during introspection and self-referential thinking.',
-                'In schizophrenia, disruptions lead to difficulty distinguishing internal from external stimuli.',
-                'This contributes to delusions and a distorted sense of reality.'
+                'DMN → active during introspection → self-referential thinking.',
+                'Disruptions → difficulty distinguishing internal from external stimuli.',
+                'Leads to delusions + distorted reality perception.'
             ]
         },
         {
             title: 'Cortical Thinning and Connectivity Issues',
-            description: 'Schizophrenia is associated with cortical thinning and reduced connectivity across brain regions.',
+            description: 'Cortical thinning + reduced connectivity affect cognition + processing.',
             brain_region: ['pfc', 'hippocampus', 'thalamus'],
             details: [
-                'Cortical thinning affects processing speed and cognitive flexibility.',
-                'Connectivity disruptions impair communication between key brain regions.',
-                'These changes contribute to the complexity of schizophrenia symptoms.'
+                'Thinning → slower processing speed + reduced flexibility.',
+                'Impaired regional communication → symptom complexity.',
+                'Reduced connectivity intensifies schizophrenia effects.'
+            ]
+        }
+    ];
+
+
+    const filler_events = [
+        {
+            title: 'No Event Selected',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.',
+            brain_region: ['hypothalamus', 'amygdala', 'pfc', 'basal-ganglia', 'brainstem'],
+            details: [
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'Suspendisse varius enim in eros elementum tristique.',
+                'Proin euismod, nisi vel consectetur elementum, nisi velit pulvinar nisl, eget fermentum augue arcu quis velit.'
             ]
         }
     ];
@@ -413,7 +428,7 @@ const Timeline = ({ selection, triggerUndulation }) => {
         regions.forEach((region, index) => {
             setTimeout(() => {
                 triggerUndulation(region);
-            }, index * 2100); // 2 seconds for each region
+            }, index * 2100); // 2.1 seconds for each region
         });
 
     };
@@ -421,6 +436,9 @@ const Timeline = ({ selection, triggerUndulation }) => {
     return (
         <div style={styles.timeline}>
             <h2 style={styles.heading}>Timeline</h2>
+            <div style={styles.progressIndicator}>
+                <span>{currentIndex + 1} of {events.length}</span>
+            </div> <br />
             <div style={styles.eventItem}>
                 <strong>{events[currentIndex].title}:</strong> {events[currentIndex].description} <br />
                 <br />
@@ -435,11 +453,11 @@ const Timeline = ({ selection, triggerUndulation }) => {
                         <li key={index}>{detail}</li>
                     ))}
                 </ul>
-
             </div>
             <button onClick={handleNext} style={styles.nextButton}>
                 Next →
             </button>
+
         </div>
     );
 };

@@ -8,7 +8,7 @@ import { act } from 'react';
 import { active } from 'd3';
 
 function Content() {
-    const [selection, setSelection] = useState('outer');
+    const [selection, setSelection] = useState('alzheimers');
 
     const [activeRegion, setActiveRegion] = useState(null);
     const [activeRegions, setActiveRegions] = useState({});
@@ -31,7 +31,7 @@ function Content() {
         const intervalTime = 100; // Time between each shade change (ms)
         const newIntervalId = setInterval(() => {
             setActiveRegions((prev) => {
-                const currentActivity = (prev[regionId] || 0) + 10;
+                const currentActivity = (prev[regionId] || 0) + 7;
                 return { ...prev, [regionId]: currentActivity % 100 };
             });
         }, intervalTime);

@@ -11,18 +11,18 @@ const BrainMap = ({ selection, undulateRegion, activeRegions }) => {
 
     // Base colors for each region
     const baseColors = {
-        "frontal-lobe": "#ffcccc", // Lighter Red
-        "parietal-lobe": "#b3e0f0", // Lighter Blue
+        "frontal-lobe": "#F536BC", // Dark Pink
+        "parietal-lobe": "#F587D4", // Light Pink
         "temporal-lobe": "#aee6a1", // Lighter Green
         "occipital-lobe": "#e6a3d1", // Lighter Purple
-        "hippocampus": "#f2c94c", // Lighter Sandy Brown
-        "basal-ganglia": "#ffe6cc", // Lighter Blanched Almond
-        "hypothalamus": "#ffcccc", // Lighter Misty Rose
+        "hippocampus": "#2F00FA", // Lighter Sandy Brown
+        "basal-ganglia": "#F52300", // Lighter Blanched Almond
+        "hypothalamus": "#F58E00", // Lighter Misty Rose
         "thalamus": "#d1c4e9", // Lighter Lavender
         "acc": "#d9d9d9", // Lighter Gray
-        "pfc": "#f2e6a3", // Lighter Khaki
-        "amygdala": "#ffb3c1", // Lighter Pink
-        "brainstem": "#808080"
+        "pfc": "#F53649", // Lighter Khaki
+        "amygdala": "#D636F5", // Dark purple
+        "brainstem": "#808080" // Gray
     };
 
 
@@ -75,14 +75,11 @@ const BrainMap = ({ selection, undulateRegion, activeRegions }) => {
         { id: "amygdala", name: "Amygdala", path: "m 104.63985,164.04091 c 0.0895,-0.0671 0.17898,-0.13424 0.26847,-0.20136 0,-0.0224 -0.0158,-0.0513 0,-0.0671 0.0158,-0.0158 0.0471,0.01 0.0671,0 0.10653,-0.0533 0.15706,-0.22419 0.20136,-0.26849 0.0336,-0.0336 0.10067,-0.0336 0.13423,-0.0671 0.0627,-0.0627 0.0715,-0.27291 0.13425,-0.3356 0.0158,-0.0158 0.0513,0.0158 0.0671,0 0.0316,-0.0316 -0.02,-0.0942 0,-0.13424 0.20215,-0.40431 0.44505,-1.45908 0.20135,-1.94648 -0.28352,-0.56705 -1.03885,-1.39198 -1.61087,-1.678 -0.0793,-0.0396 -0.12732,-0.15199 -0.20136,-0.20135 -0.12222,-0.0815 -0.52941,-0.26471 -0.6712,-0.3356 -0.19012,-0.0951 -0.45977,-0.21563 -0.6712,-0.26848 -0.0434,-0.0109 -0.0918,0.0142 -0.13424,0 -0.03,-0.01 -0.0448,-0.0447 -0.0671,-0.0671 -0.0448,-0.0224 -0.0857,-0.055 -0.13424,-0.0671 -0.0651,-0.0163 -0.14132,0.03 -0.20136,0 -0.19227,-0.0961 -0.43898,-0.22204 -0.6712,-0.26848 -0.2673,-0.0535 -0.53253,-0.0797 -0.80543,-0.13424 -0.1029,-0.0206 -0.23625,0.0331 -0.3356,0 -0.11515,-0.0384 -0.228546,-0.0314 -0.335604,-0.0671 -0.03001,-0.01 -0.0371,-0.0571 -0.06712,-0.0671 -0.106124,-0.0354 -0.225253,0.0184 -0.335597,0 -0.198509,-0.0331 -0.522317,-0.0598 -0.6712,-0.13424 -0.135245,-0.0676 -0.390173,0.0293 -0.536959,0 -0.04906,-0.01 -0.0857,-0.055 -0.134239,-0.0671 -0.19698,-0.0493 -0.468836,0 -0.671198,0 -0.256381,0 -1.262292,-0.0715 -1.476637,0 -0.706657,0.23555 -1.199483,0.21795 -1.879356,0.6712 -0.08964,0.0598 -0.260128,0.12589 -0.3356,0.20136 -0.03538,0.0354 -0.03175,0.0989 -0.06712,0.13424 -0.09666,0.0967 -0.250348,0.1406 -0.335597,0.26847 -0.449578,0.67437 -0.541462,0.89057 -0.73832,1.678 -0.114996,0.45999 -0.230799,1.66503 -0.134239,2.14784 0.07326,0.36632 0.510659,0.9907 0.738317,1.27527 0.626126,0.78266 1.691471,1.06946 2.617677,1.27528 0.449931,0.1 0.887558,0.27062 1.342395,0.3356 0.153482,0.0219 0.316359,-0.0219 0.469839,0 0.535908,0.0766 1.064297,0.0671 1.610876,0.0671 0.357809,0 1.224022,0.0799 1.543752,0 0.0485,-0.0121 0.0852,-0.0573 0.13425,-0.0671 0.19309,-0.0386 0.24376,0.0124 0.40271,-0.0671 0.1713,-0.0856 0.48499,0.0372 0.6712,0 0.11283,-0.0226 1.17995,-0.30739 1.20816,-0.3356 0.0158,-0.0158 -0.0158,-0.0513 0,-0.0671 0.0605,-0.0605 0.25557,-0.0942 0.3356,-0.13424 0.13455,-0.0673 0.80544,-0.73092 0.80544,-0.80544" },
     ]
 
-    const handleMouseEnter = (region) => setHoveredRegion(region);
-    const handleMouseLeave = () => setHoveredRegion(null);
-
     // Function to get the dynamic color for each region
     const getDynamicColor = (baseColor, activity) => {
-        const darkerShade = d3.rgb(baseColor).darker(1.5);
-        const interpolator = d3.interpolateRgb(baseColor, darkerShade);
-        return interpolator(activity / 100);
+        const lighterShade = d3.rgb(baseColor).brighter(5); // Increased brightness for more dramatic effect
+        const interpolator = d3.interpolateRgb(baseColor, lighterShade);
+        return interpolator(activity / 150); // Adjusted divisor for more pronounced pulsing
     };
 
     return (
@@ -91,7 +88,13 @@ const BrainMap = ({ selection, undulateRegion, activeRegions }) => {
             {/* Renders outer and inner svg files. */}
 
             {selection === "alzheimers" && (
-                <svg width="100%" height="100%" viewBox="0 0 210 297" style={styles.svg}>
+                <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="50 80 100 140"
+                    style={styles.svg}
+                    preserveAspectRatio="xMidYMid meet"
+                >
                     {brainRegionsBase.map((region) => (
                         <path
                             key={region.id} // Ensure a unique key for each element
@@ -143,7 +146,13 @@ const BrainMap = ({ selection, undulateRegion, activeRegions }) => {
             )}
 
             {selection === "anxiety" && (
-                <svg width="100%" height="100%" viewBox="0 0 210 297" style={styles.svg}>
+                <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="50 80 100 140"
+                    style={styles.svg}
+                    preserveAspectRatio="xMidYMid meet"
+                >
                     {brainRegionsBase.map((region) => (
                         <path
                             key={region.id} // Ensure a unique key for each element
@@ -189,7 +198,13 @@ const BrainMap = ({ selection, undulateRegion, activeRegions }) => {
             )}
 
             {selection === "depression" && (
-                <svg width="100%" height="100%" viewBox="0 0 210 297" style={styles.svg}>
+                <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="50 80 100 140"
+                    style={styles.svg}
+                    preserveAspectRatio="xMidYMid meet"
+                >
                     {brainRegionsBase.map((region) => (
                         <path
                             key={region.id} // Ensure a unique key for each element
@@ -235,7 +250,13 @@ const BrainMap = ({ selection, undulateRegion, activeRegions }) => {
             )}
 
             {selection === "bipolar" && (
-                <svg width="100%" height="100%" viewBox="0 0 210 297" style={styles.svg}>
+                <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="50 80 100 140"
+                    style={styles.svg}
+                    preserveAspectRatio="xMidYMid meet"
+                >
                     {brainRegionsBase.map((region) => (
                         <path
                             key={region.id} // Ensure a unique key for each element
@@ -281,7 +302,13 @@ const BrainMap = ({ selection, undulateRegion, activeRegions }) => {
             )}
 
             {selection === "schizophrenia" && (
-                <svg width="100%" height="100%" viewBox="0 0 210 297" style={styles.svg}>
+                <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="50 80 100 140"
+                    style={styles.svg}
+                    preserveAspectRatio="xMidYMid meet"
+                >
                     {brainRegionsBase.map((region) => (
                         <path
                             key={region.id} // Ensure a unique key for each element
@@ -344,18 +371,17 @@ const BrainMap = ({ selection, undulateRegion, activeRegions }) => {
 };
 
 const styles = {
-
     brain_map_container: {
         textAlign: "center",
-        maxHeight: '50vh',
+        maxHeight: "100vh", // Allow the container to grow
     },
-
     svg: {
-        maxHeight: '50vh'
-
-    }
-
-}
-
+        width: "40vw", // Use a percentage of the viewport width
+        height: "40vh", // Use a percentage of the viewport height
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+};
 export default BrainMap;
 
