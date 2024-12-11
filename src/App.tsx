@@ -22,8 +22,6 @@ function App() {
         </div>
       ) : (
         <div>
-          {/* Show content when not on the landing page */}
-          <Navbar />
           <Content />
         </div>
       )}
