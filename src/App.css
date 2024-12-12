@@ -1,16 +1,35 @@
 /* General Styles for App */
 #root {
+  display: flex;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+  flex-direction: column;
+
 }
 
+body {
+	background-color: #2f3033;
+}
+
+/* Logo Styles */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  width: 800px;
+  height: auto; 
+  position: relative;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  background-color: transparent;
+}
+
+.logo-container {
+	border: none;
+	padding: 0;
+	margin: 0;
 }
 
 .logo:hover {
@@ -21,47 +40,15 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* NEW STYLES FOR THE LANDING PAGE */
+/* Landing Page Styles */
 .landing-page {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 10px;
   font-family: 'Arial', sans-serif;
+  border: none;
 }
 
-.landing-page h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  color: #2c3e50;
-}
-
-.landing-page p {
-  font-size: 1.25rem;
-  margin-bottom: 20px;
-  color: #7f8c8d;
-}
 
 .landing-page button {
   font-size: 1.25rem;
@@ -80,14 +67,31 @@
 }
 
 .landing-page img {
-  width: 200px;
+  width: 800px;
   margin-top: 30px;
-  animation: logo-spin infinite 20s linear; /* Optional: spinning logo animation */
+  background-color: transparent;
+ }
+
+
+/* Content Page and Navbar */
+.landing-page, .content-page {
+  text-align: center;
+  padding: 20px;
 }
 
-.landing-page .description {
-  font-size: 1.1rem;
-  color: #34495e;
-  margin-top: 10px;
+.content-page {
+  padding: 40px;
+  }
+
+
+/* Header Styles */
+.header {
+  background-color: transparent;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
+
+
+ 
