@@ -1,50 +1,13 @@
-# React + TypeScript + Vite
+# OurCogntion.com
+Independent Study Research with Rensselear Polytechnic Institute Cognitive Science Department 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Contributors: Shamik Karkhanis, Nico Diaz
 
-Currently, two official plugins are available:
+Faculty Advisor: Dr. Benjamin Weissman
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Project Summary
 
-## Expanding the ESLint configuration
+OurCognition is a web application designed to illustrate how various cognitive disorders and diseases impact the brain and disrupt the flow of information. By enabling users to explore a timeline for each disorder, the platform highlights affected brain regions, explains the impact on information processing, and connects these insights to real-world implications for patients.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+OurCognition has the potential to become a leading tool for visualizing cognitive disorders and their impact on the brain. By integrating user feedback and advancing its feature set, the platform can scale into a versatile educational resource. Future updates will prioritize enhanced interactivity, detailed visualizations, and expanded content to meet the needs of diverse users.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
