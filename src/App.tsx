@@ -5,44 +5,50 @@ import Navbar from './components/Navbar.jsx';
 
 
 function App() {
-  // State to switch between landing and content pages
-  const [isLandingPage, setIsLandingPage] = useState(true);
+    // State to switch between landing and content pages
+    const [isLandingPage, setIsLandingPage] = useState(true);
 
-  // Function to switch to the content page
-  const goToContent = () => setIsLandingPage(false);
+    // Function to switch to the content page
+    const goToContent = () => setIsLandingPage(false);
 
-  // Function to go back to the landing page
-  const goBackToLanding = () => setIsLandingPage(true);
+    // Function to go back to the landing page
+    const goBackToLanding = () => setIsLandingPage(true);
 
-  return (
-    <div>
-      {/* Common Header */}
-      <header className="header">
-        <div className="logo-container" onClick={goBackToLanding}>
-          <img src="/assets/logo_type.png" alt="OurCognition Logo" className="logo" />
-        </div>
+    return (
+        <div>
+            {/* Common Header */}
+            <header className="header">
+                <div className="logo-container" onClick={goBackToLanding}>
+                    <img src="/assets/logo_type.png" alt="OurCognition Logo" className="logo" />
+                </div>
 
-        {/* Button to go to Content (only on Landing Page) */}
-        {isLandingPage && (
-          <button className="enter-button" onClick={goToContent}>
-            Learn More
-          </button>
-        )}
-      </header>
+                <div className="details-container">
+                    <p>Our web app provides a visual and interactive journey through the progression of neurodegenerative diseases, highlighting the regions of the brain affected at each stage. By showcasing the parts of the brain active during different aspects of these disorders, the app deepens our understanding of how and where these diseases take hold. Each slide presents key insights in a clear, bullet-point format, building upon core concepts from our neuroscience studies to make complex information accessible and engaging.</p>
+                </div>
 
-      {/* Conditional rendering for Landing or Content pages */}
-      {isLandingPage ? (
-        <div className="landing-page">      
-</div>
+                {/* Button to go to Content (only on Landing Page) */}
+                {/* {isLandingPage && (
+                    <button className="enter-button" onClick={goToContent}>
+                        Learn More
+                    </button>
+                )} */}
 
-      ) : (
+                <Content />
+            </header>
 
-        <div className="content-page">
-           <Content />
-        </div>
-      )}
-    </div>
-  );
+            {/* Conditional rendering for Landing or Content pages
+            {isLandingPage ? (
+                <div className="landing-page">
+                </div>
+
+            ) : (
+
+                <div className="content-page">
+
+                </div>
+            )} */}
+        </div>
+    );
 }
 
 export default App;
