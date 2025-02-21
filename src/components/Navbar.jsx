@@ -29,8 +29,7 @@ function Navbar() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-          <img src='/images/logo_form.png' alt='OurCognition Logo' className="logo" />
-            <i class='fab fa-typo3' />
+            <img src='/images/logo_form.png' alt='OurCognition Logo' className="logo" />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -43,34 +42,43 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/services'
+                to='/content'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Services
+                Content
               </Link>
             </li>
             <li className='nav-item'>
               <Link
-                to='/products'
+                to='/about'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Products
+                About Us
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link
+                to='/contact'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+                Contact
               </Link>
             </li>
 
             <li>
               <Link
-                to='/sign-up'
+                to='/sign-up' // Update this to something more fitting if needed
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
-                Sign Up
+                Get Started
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+          {button && <Button buttonStyle='btn--outline'>Get Started</Button>}
         </div>
       </nav>
     </>
