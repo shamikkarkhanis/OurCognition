@@ -1,5 +1,5 @@
 .footer-container {
-    background-color: #242424;
+    background-color: #242424; /* Dark background for the footer */
     padding: 4rem 0 2rem 0;
     display: flex;
     flex-direction: column;
@@ -13,25 +13,25 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-  
     margin-bottom: 24px;
     padding: 24px;
     color: #fff;
   }
   
   .footer-subscription > p {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-      'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
   
   .footer-subscription-heading {
     margin-bottom: 24px;
     font-size: 24px;
+    color: #fff; /* White color for the heading */
   }
   
   .footer-subscription-text {
     margin-bottom: 24px;
     font-size: 20px;
+    color: #fff; /* White color for the text */
   }
   
   .footer-input {
@@ -43,6 +43,12 @@
     font-size: 18px;
     margin-bottom: 16px;
     border: 1px solid #fff;
+    background-color: #333; /* Dark background for the input */
+    color: #fff;
+  }
+  
+  .footer-input::placeholder {
+    color: #b1b1b1; /* Lighter placeholder text */
   }
   
   .footer-links {
@@ -50,10 +56,12 @@
     max-width: 1000px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
   
   .footer-link-wrapper {
     display: flex;
+    flex-wrap: wrap;
   }
   
   .footer-link-items {
@@ -68,10 +76,7 @@
   
   .footer-link-items h2 {
     margin-bottom: 16px;
-  }
-  
-  .footer-link-items > h2 {
-    color: #fff;
+    color: #fff; /* White for section headers */
   }
   
   .footer-link-items a {
@@ -81,19 +86,10 @@
   }
   
   .footer-link-items a:hover {
-    color: #e9e9e9;
+    color: #e91e63; /* Pink color on hover */
     transition: 0.3s ease-out;
   }
   
-  .footer-email-form h2 {
-    margin-bottom: 2rem;
-  }
-  
-  .footer-input::placeholder {
-    color: #b1b1b1;
-  }
-  
-  /* Social Icons */
   .social-icon-link {
     color: #fff;
     font-size: 24px;
@@ -160,4 +156,20 @@
   }
   
   @media screen and (max-width: 768px) {
+    .footer-links {
+      padding-top: 1rem;
+    }
+  
+    .footer-input {
+      width: 100%;
+    }
+  
+    .footer-link-wrapper {
+      flex-direction: column;
+    }
+  
+    .social-media-wrap {
+      flex-direction: column;
+    }
   }
+  

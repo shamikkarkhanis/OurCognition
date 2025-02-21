@@ -17,16 +17,9 @@ function HeroSection() {
           className='btns'
           buttonStyle='btn--outline'
           buttonSize='btn--large'
+          onClick={() => window.location.href = '/content'} // Redirect to the content page
         >
           LEARN MORE
-        </Button>
-        <Button
-          className='btns'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
-          onClick={console.log('hey')}
-        >
-          WATCH VIDEO <i className='far fa-play-circle' />
         </Button>
       </div>
     </div>

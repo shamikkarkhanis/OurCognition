@@ -21,7 +21,7 @@
 }
 
 .navbar-logo {
-  color: #fff;
+  color: #f3b5b8;
   justify-self: start;
   cursor: pointer;
   text-decoration: none;
@@ -31,6 +31,7 @@
 }
 
 .logo {
+  color: #f3b5b8;
   height: 3em; /* Adjusted logo size */
   padding: 0.8em;
 }
