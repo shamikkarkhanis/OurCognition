@@ -1,9 +1,9 @@
 // Content.jsx
 
 import { useState } from 'react';
-import Navbar from './Navbar.jsx';
-import BrainHeatmap from './BrainHeatmap.jsx';
-import Timeline from './Timeline.jsx';
+import Navbar from '../ContentNavbar.jsx';
+import BrainHeatmap from '../BrainHeatmap.jsx';
+import Timeline from '../Timeline.jsx';
 
 function Content() {
     const [selection, setSelection] = useState('outer');

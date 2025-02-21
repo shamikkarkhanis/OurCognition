@@ -1,17 +1,28 @@
-import { useState } from 'react'
-import './App.css'
-import BrainHeatmap from "./components/BrainHeatmap.jsx";
-import Content from "./components/Content.jsx";
-import Timeline from "./components/Timeline.jsx"
+import React from 'react';
 import Navbar from "./components/Navbar.jsx"
+import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from "./components/Home.jsx"
+import Content from "./components/pages/Content.jsx";
+import About from "./components/About.jsx"
+import Contact from "./components/Contact.jsx"
+
+
 
 function App() {
   return (
-    <div>
-      <h1> Our Cognition </h1>
-      <Content />
-    </div>
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' exact element={Home} />
+          <Route path='/content' element={Content} />
+          <Route path='/about' element={About} />
+          <Route path='/sign-up' element={Contact} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
-export default App
+export default App;
