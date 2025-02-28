@@ -60,7 +60,7 @@ const BrainActivitySimulator = ({
         from: null,       // starting value for transition
         transitionStart: 0,
         transitionDuration: 1000, // ms
-        trails: []        // each trail: { sector: number, startTime: number }
+        trails: [(1, 1), (2, 7)]        // each trail: { sector: number, startTime: number }
     });
 
     // Trail fade duration in ms
