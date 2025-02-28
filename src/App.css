@@ -5,30 +5,30 @@
   margin: 0 auto; /* Center the content horizontally */
   padding: 0; /* No extra padding */
   text-align: center; /* Center text */
+  color-scheme: dark; /* Dark mode */
+  font-family: 'Arial', sans-serif; /* Use a more readable font */
+  background-color: #5d5d5d; /* Darker background */
+  color: white; /* White text for better contrast */
+  overflow: hidden; /* Prevent scrollbars */
 }
 
 .logo {
-  height: 3.6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  height: 2.5em; /* Adjust logo size */
+  width: auto; /* Maintain aspect ratio */
+  padding: 0.5em; /* Reduce excessive padding */
+  transition: none; /* Remove unnecessary effects */
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: none; /* Removes the glowing effect */
 }
 
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10; /* Ensure it's properly layered */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -36,6 +36,11 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+
+@media (prefers-color-scheme: dark) { 
+  /* REMOVE this section if you don't want auto dark mode */
+}
+
 
 .card {
   padding: 2em;
