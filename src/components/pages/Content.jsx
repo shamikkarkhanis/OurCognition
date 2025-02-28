@@ -1,9 +1,9 @@
 // Content.jsx
 
 import { useState, useRef } from 'react';
-import Navbar from './ContentNavbar.jsx';
-import BrainHeatmap from './BrainHeatmap.jsx';
-import Timeline from './Timeline.jsx';
+import Navbar from '../ContentNavbar.jsx';
+import BrainHeatmap from '../BrainHeatmap.jsx';
+import Timeline from '../Timeline.jsx';
 import { act } from 'react';
 import { active } from 'd3';
 
