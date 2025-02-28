@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Navbar = ({ setSelection }) => {
-    const [selected, setSelected] = useState("outer"); // Default selected item
+    const [selected, setSelected] = useState("alzheimers"); // Default selected item
 
     const handleSelection = (selection) => {
         setSelection(selection); // Update the parent state
@@ -10,26 +10,56 @@ const Navbar = ({ setSelection }) => {
 
     return (
         <nav style={styles.navbar}>
-            <div>
+            <div style={styles.buttonContainer}>
                 <button
-                    onClick={() => handleSelection("outer")}
+                    onClick={() => handleSelection("alzheimers")}
                     style={
-                        selected === "outer"
+                        selected === "alzheimers"
                             ? { ...styles.link, ...styles.selected }
                             : styles.link
                     }
                 >
-                    Outer
+                    Alzheimer's
                 </button>
                 <button
-                    onClick={() => handleSelection("inner")}
+                    onClick={() => handleSelection("anxiety")}
                     style={
-                        selected === "inner"
+                        selected === "anxiety"
                             ? { ...styles.link, ...styles.selected }
                             : styles.link
                     }
                 >
-                    Inner
+                    Anxiety
+                </button>
+                <button
+                    onClick={() => handleSelection("depression")}
+                    style={
+                        selected === "depression"
+                            ? { ...styles.link, ...styles.selected }
+                            : styles.link
+                    }
+                >
+                    Depression
+                </button>
+                <button
+                    onClick={() => handleSelection("bipolar")}
+                    style={
+                        selected === "bipolar"
+                            ? { ...styles.link, ...styles.selected }
+                            : styles.link
+                    }
+                >
+                    Bipolar Disorder
+                </button>
+                <button
+                    onClick={() => handleSelection("schizophrenia")}
+                    style={
+                        selected === "schizophrenia"
+                            ? { ...styles.link, ...styles.selected }
+                            : styles.link
+                    }
+                >
+                    Schizophrenia
                 </button>
             </div>
         </nav>
@@ -39,11 +69,16 @@ const Navbar = ({ setSelection }) => {
 const styles = {
     navbar: {
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "center", // Center the button container
         alignItems: "center",
         padding: "10px 20px",
         backgroundColor: "#1c1c1e", // Dark background color
         borderRadius: "10px",
+    },
+    buttonContainer: {
+        display: "flex",
+        justifyContent: "space-around", // Space buttons equally
+        width: "100%", // Ensure the container takes full width
     },
     link: {
         textDecoration: "none",
