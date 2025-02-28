@@ -1,7 +1,7 @@
 // Content.jsx
 
 import { useState, useRef } from 'react';
-import Navbar from './Navbar.jsx';
+import Navbar from './ContentNavbar.jsx';
 import BrainHeatmap from './BrainHeatmap.jsx';
 import Timeline from './Timeline.jsx';
 import { act } from 'react';
