@@ -12,16 +12,17 @@
 
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* Adjusted to space the logo and menu out */
+  justify-content: center; /* Centering the menu */
   align-items: center;
-  height: 70px; /* Adjusted height */
-  max-width: 1500px;
   width: 100%;
-  padding: 0 20px; /* Added padding for spacing */
+  padding: 0 20px;
+  position: relative;
 }
 
 .navbar-logo {
   color: #f3b5b8;
+  position: absolute;
+  left: 20px; /* Keeps logo on the left */
   justify-self: start;
   cursor: pointer;
   text-decoration: none;
@@ -50,6 +51,9 @@
   width: 50vw; /* Adjusted width */
   justify-content: center; /* Centered the nav items */
   margin-right: 0; /* Removed extra margin */
+  margin: 0 auto; /* Ensures proper centering */
+  padding: 0;
+  width: fit-content;
 }
 
 .nav-item {

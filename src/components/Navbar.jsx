@@ -1,39 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
   const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-
-  const showButton = () => {
-    if (window.innerWidth <= 960) {
-      setButton(false);
-    } else {
-      setButton(true);
-    }
-  };
-
-  useEffect(() => {
-    showButton();
-  }, []);
-
-  window.addEventListener('resize', showButton);
 
   return (
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
+          {/* Logo stays on the left */}
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             <img src='/images/logo_form_pink.png' alt='OurCognition Logo' className="logo" />
           </Link>
+
+          {/* Hamburger menu icon for mobile */}
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
+
+          {/* Navbar Items - Aligned to the right */}
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
               <Link to='/' className='nav-links' onClick={closeMobileMenu}>
@@ -41,44 +30,21 @@ function Navbar() {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/content'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
+              <Link to='/content' className='nav-links' onClick={closeMobileMenu}>
                 Content
               </Link>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/about'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
+              <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
                 About Us
               </Link>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/contact'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
+              <Link to='/contact' className='nav-links' onClick={closeMobileMenu}>
                 Contact
               </Link>
             </li>
-
-            <li>
-              <Link
-                to='/sign-up' // Update this to something more fitting if needed
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                Get Started
-              </Link>
-            </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>Get Started</Button>}
         </div>
       </nav>
     </>
