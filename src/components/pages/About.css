@@ -1,0 +1,118 @@
+/* General Page Styles */
+.about-page {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* 1) Hero Section */
+.hero-section {
+    position: relative;
+    background: url('../../assets/background2.jpeg') center center / cover no-repeat;
+    height: 80vh;
+    /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Dark overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 600px;
+    color: #fff;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.hero-button {
+    background-color: #ff7f7f;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.hero-button:hover {
+    background-color: #ff4f4f;
+}
+
+/* 2) Highlights Section (Three Columns) */
+.highlights-section {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows columns to wrap on smaller screens */
+    gap: 2rem;
+    padding: 60px 10%;
+    background: #fafafa;
+}
+
+.highlight {
+    flex: 1;
+    min-width: 280px;
+    /* Ensures columns don’t collapse too much on smaller screens */
+}
+
+.highlight h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.highlight p {
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* 3) Abstract Section (Pink 3D Style) */
+.abstract-section {
+    position: relative;
+    background: url('../../assets/background.jpeg') center center / cover no-repeat;
+    padding: 80px 10%;
+    color: #fff;
+}
+
+.abstract-overlay {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Optional overlay for readability */
+    padding: 60px;
+    border-radius: 8px;
+}
+
+.abstract-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.abstract-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.abstract-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
