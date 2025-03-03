@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../App.css';
+import '../styles/App.css';
 
 export default function About() {
   return (
@@ -19,7 +19,7 @@ export default function About() {
       </p>
       <p className='about-description'>
         Developed by <strong>Shamik Karkhanis</strong> and <strong>Nico Diaz</strong>,
-        with guidance from faculty advisor <strong>Dr. Benjamin Weissman</strong>, 
+        with guidance from faculty advisor <strong>Dr. Benjamin Weissman</strong>,
         OurCognition hopes to provide a resource for both educational and research purposes.
         Our goal is to create a versatile tool for visualizing cognitive disorders, empowering
         individuals to deepen their understanding of the neurological underpinnings of various diseases.
