@@ -1,12 +1,12 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer'; // Assuming you have a Footer component
-import './App.css';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer'; // Assuming you have a Footer component
+import './styles/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/pages/Home';
-import Content from './components/pages/Content';
-import About from './components/pages/About';
-import Contact from './components/pages/Contact';
+import Home from './pages/Home';
+import Content from './pages/Content';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 function App() {
   return (
