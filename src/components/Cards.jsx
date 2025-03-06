@@ -10,36 +10,16 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='/images/brain-research.jpg'
-              text="Dive deep into the science behind Alzheimer's disease"
-              label='Research'
-              path='/research'
+              src='/images/alzheimers_heatmap_example.jpg'
+              text="Alzheimer's Disease Macro View"
+              label='Macro'
+              path='/Content'
             />
             <CardItem
-              src='/images/cognitive-health.jpg'
-              text="Understand the importance of cognitive health in aging"
-              label='Awareness'
-              path='/awareness'
-            />
-          </ul>
-          <ul className='cards__items'>
-            <CardItem
-              src='/images/treatment-options.jpg'
-              text="Learn about the latest treatment options and therapies"
-              label='Treatment'
-              path='/treatments'
-            />
-            <CardItem
-              src='/images/prevention-strategies.jpg'
-              text="Explore strategies for preventing Alzheimer's disease"
-              label='Prevention'
-              path='/prevention'
-            />
-            <CardItem
-              src='/images/support-resources.jpg'
-              text="Find resources for patients and caregivers"
-              label='Support'
-              path='/support'
+              src='/images/nerve_cell_example.jpg'
+              text="Alzheimer's Disease Micro View"
+              label='Micro'
+              path='/Content'
             />
           </ul>
         </div>
