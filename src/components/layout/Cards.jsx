@@ -10,13 +10,13 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='/images/alzheimers_heatmap_example.jpg'
+              src='src/assets/alzheimers_heatmap_example.jpg'
               text="Alzheimer's Disease Macro View"
               label='Macro'
               path='/Content'
             />
             <CardItem
-              src='/images/nerve_cell_example.jpg'
+              src='src/assets/nerve_cell_example.jpg'
               text="Alzheimer's Disease Micro View"
               label='Micro'
               path='/Content'
