@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import '../../styles/Navbar.css';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -14,7 +14,7 @@ function Navbar() {
         <div className='navbar-container'>
           {/* Logo stays on the left */}
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            <img src='/images/logo_form_pink.png' alt='OurCognition Logo' className="logo" />
+            <img src='logo_form_pink.png' alt='OurCognition Logo' className="logo" /> {/* This should use src/assets images */}
           </Link>
 
           {/* Hamburger menu icon for mobile */}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Navbar = ({ setSelection }) => {
+const ContentNavbar = ({ setSelection }) => {
     const [selected, setSelected] = useState("alzheimers"); // Default selected item
 
     const handleSelection = (selection) => {
@@ -98,4 +98,4 @@ const styles = {
     },
 };
 
-export default Navbar;
+export default ContentNavbar;

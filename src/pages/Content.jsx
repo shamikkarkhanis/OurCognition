@@ -1,11 +1,10 @@
 // Content.jsx
 
 import { useState, useRef } from 'react';
-import Navbar from '../ContentNavbar.jsx';
-import BrainHeatmap from '../BrainHeatmap.jsx';
-import Timeline from '../Timeline.jsx';
-import { act } from 'react';
-import { active } from 'd3';
+import ContentNavbar from '../components/layout/ContentNavbar.jsx';
+import BrainHeatmap from '../components/common/BrainHeatmap.jsx';
+import Timeline from '../components/layout/Timeline.jsx';
+
 
 function Content() {
     const [selection, setSelection] = useState('alzheimers');
@@ -42,7 +41,7 @@ function Content() {
 
     return (
         <div style={styles.container}>
-            <Navbar setSelection={setSelection} />
+            <ContentNavbar setSelection={setSelection} />
             <div style={styles.content}>
                 <div style={styles.heatmapContainer}>
                     <BrainHeatmap
