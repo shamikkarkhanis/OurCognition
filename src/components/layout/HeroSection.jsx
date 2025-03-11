@@ -1,15 +1,15 @@
 import React from 'react';
-import '../App.css';
-import { Button } from './Button';
-import './HeroSection.css';
+import '../../styles/App.css';
+import { Button } from '../common/Button';
+import '../../styles/HeroSection.css';
 
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <img 
-        src='/images/logo_type.png' 
-        alt='OurCognition Logo' 
-        className='hero-logo' 
+      <img
+        src='src/assets/logo_type.png'
+        alt='OurCognition Logo'
+        className='hero-logo'
       />
       <p>Exploring the complexities of Alzheimer's disease and cognitive health</p>
       <div className='hero-btns'>

@@ -9,7 +9,7 @@
 /* 1) Hero Section */
 .hero-section {
     position: relative;
-    background: url('../../assets/background2.jpeg') center center / cover no-repeat;
+    background: url('../assets/background2.jpeg') center center / cover no-repeat;
     height: 80vh;
     /* Adjust as needed */
     display: flex;
@@ -89,7 +89,7 @@
 /* 3) Abstract Section (Pink 3D Style) */
 .abstract-section {
     position: relative;
-    background: url('../../assets/background.jpeg') center center / cover no-repeat;
+    background: url('../assets/background.jpeg') center center / cover no-repeat;
     padding: 80px 10%;
     color: #fff;
 }

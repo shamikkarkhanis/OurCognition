@@ -1,9 +1,9 @@
 // Content.jsx
 
 import { useState, useRef } from 'react';
-import ContentNavbar from '../ContentNavbar.jsx';
-import BrainHeatmap from '../BrainHeatmap.jsx';
-import Timeline from '../Timeline.jsx';
+import ContentNavbar from '../components/layout/ContentNavbar.jsx';
+import BrainHeatmap from '../components/common/BrainHeatmap.jsx';
+import Timeline from '../components/layout/Timeline.jsx';
 
 
 function Content() {
