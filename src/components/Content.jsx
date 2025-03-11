@@ -1,60 +1,27 @@
 // Content.jsx
 
-import { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Navbar from './Navbar.jsx';
 import BrainHeatmap from './BrainHeatmap.jsx';
 import Timeline from './Timeline.jsx';
-import { act } from 'react';
-import { active } from 'd3';
+
+// Memoize heavy child components to prevent unnecessary re-renders.
+const MemoizedBrainHeatmap = React.memo(BrainHeatmap);
+const MemoizedTimeline = React.memo(Timeline);
 
 function Content() {
     const [selection, setSelection] = useState('alzheimers');
-
-    const [activeRegion, setActiveRegion] = useState(null);
-    const [activeRegions, setActiveRegions] = useState({});
-    const undulationIntervalId = useRef(null);
-
-    // Function to start undulating color shades
-    const undulateRegion = (regionId) => {
-        // Stop undulation for the currently active region, if any
-        if (activeRegion) {
-            setActiveRegions((prev) => ({ ...prev, [activeRegion]: 0 })); // Reset the previous region's activity
-            if (undulationIntervalId.current) {
-                clearInterval(undulationIntervalId.current); // Clear the interval for the previous region
-            }
-        }
-
-        // Set the new active region
-        setActiveRegion(regionId);
-
-        // Start undulation for the new region
-        const intervalTime = 100; // Time between each shade change (ms)
-        const newIntervalId = setInterval(() => {
-            setActiveRegions((prev) => {
-                const currentActivity = (prev[regionId] || 0) + 7;
-                return { ...prev, [regionId]: currentActivity % 100 };
-            });
-        }, intervalTime);
-
-        // Store the new interval ID in the ref
-        undulationIntervalId.current = newIntervalId;
-    };
+    const { selectedRegions, setSelectedRegions } = useState([]);
 
     return (
         <div style={styles.container}>
             <Navbar setSelection={setSelection} />
             <div style={styles.content}>
                 <div style={styles.heatmapContainer}>
-                    <BrainHeatmap
-                        selection={selection}
-                        undulateRegion={undulateRegion}
-                        activeRegions={activeRegions} />
+                    <MemoizedBrainHeatmap selectedRegions={selectedRegions} />
                 </div>
                 <div style={styles.timelineContainer}>
-                    <Timeline
-                        selection={selection}
-                        triggerUndulation={undulateRegion} />
-
+                    <MemoizedTimeline selection={selection} />
                 </div>
             </div>
         </div>

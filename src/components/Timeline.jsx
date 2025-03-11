@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-const Timeline = ({ selection, triggerUndulation }) => {
+const Timeline = ({ selection }) => { // ! func to set selected region through timeline 
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const alzheimers_events = [

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { hslToRgb } from './utils/colorUtils';
 
 
@@ -69,12 +69,17 @@ const brainRegionsBase = [
 // ];
 
 
-const BrainMap = () => {
+const BrainMap = ({ selectedRegion }) => {
     // Track animation time for dynamic color cycling.
     const [animationTime, setAnimationTime] = useState(0);
     // Store which regions have been clicked (i.e. are in warm mode).
     const [selectedRegions, setSelectedRegions] = useState({});
 
+    // Refs to manage tooltip updates via rAF.
+    const tooltipRef = useRef(null);
+    const rafIdRef = useRef(null);
+
+    // Animation loop for updating animationTime.
     useEffect(() => {
         let animationFrameId;
         const updateTime = (timestamp) => {
@@ -98,13 +103,40 @@ const BrainMap = () => {
         }));
     };
 
+    // Helper functions to show and hide the tooltip.
+    const showTooltip = useCallback((region, clientX, clientY) => {
+        const tooltip = document.createElement("div");
+        tooltip.style.position = "absolute";
+        tooltip.style.padding = "5px 10px";
+        tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+        tooltip.style.color = "white";
+        tooltip.style.borderRadius = "4px";
+        tooltip.style.fontSize = "14px";
+        tooltip.style.pointerEvents = "none";
+        tooltip.style.zIndex = "1000";
+        tooltip.textContent = region.id;
+        document.body.appendChild(tooltip);
+        tooltipRef.current = tooltip;
+        // Update position.
+        tooltipRef.current.style.left = `${clientX + 10}px`;
+        tooltipRef.current.style.top = `${clientY + 10}px`;
+    }, []);
+
+    const hideTooltip = useCallback(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.remove();
+            tooltipRef.current = null;
+        }
+    }, []);
+
     return (
         <div style={styles.container}>
             <svg
                 width="80vw"
                 height="80vh"
-                viewBox="0 10 200 200"
+                viewBox="0 50 200 200"
                 style={styles.svg}
+                preserveAspectRatio="xMidYMid meet"
             >
                 {brainRegionsBase.map((region, index) => {
                     // Each region uses a slight phase offset to add variety.
@@ -113,8 +145,8 @@ const BrainMap = () => {
                     const isWarm = !!selectedRegions[region.id];
                     // Compute the effective hue based on the phase.
                     const effectiveHue = isWarm
-                        ? 30 + 30 * Math.sin(regionPhase - Math.PI / 2)   // Warm: ~0 to 60
-                        : 240 + 60 * Math.sin(regionPhase - Math.PI / 2);  // Cool: ~180 to 300
+                        ? 30 + 30 * Math.sin(regionPhase - Math.PI / 2) // Warm: ~0 to 60
+                        : 240 + 60 * Math.sin(regionPhase - Math.PI / 2); // Cool: ~180 to 300
                     const rgb = hslToRgb(effectiveHue, 1, 0.5);
                     const fillColor = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
 
@@ -127,30 +159,46 @@ const BrainMap = () => {
                             style={{ transition: "fill 0.5s ease" }}
                             onClick={() => handleRegionClick(region.id)}
                             onMouseEnter={(e) => {
+                                // Set highlight stroke.
                                 e.target.style.stroke = "#333";
                                 e.target.style.strokeWidth = "1";
+                                // Bring the hovered element to the front.
                                 e.target.parentNode.appendChild(e.target);
+                                // Use rAF to update (or create) the tooltip.
+                                rafIdRef.current = requestAnimationFrame(() => {
+                                    showTooltip(region, e.clientX, e.clientY);
+                                    rafIdRef.current = null;
+                                });
                             }}
                             onMouseLeave={(e) => {
                                 e.target.style.stroke = "none";
+                                if (!rafIdRef.current) {
+                                    rafIdRef.current = requestAnimationFrame(() => {
+                                        hideTooltip();
+                                        rafIdRef.current = null;
+                                    });
+                                }
                             }}
                         />
                     );
                 })}
-
             </svg>
         </div>
     );
-
-
 };
 
 const styles = {
     container: {
         textAlign: "center",
         margin: "0 auto",
+        backgroundColor: "rgb(28, 28, 28)",
     },
     svg: {
+        width: "40vw", // Use a percentage of the viewport width
+        height: "40vh", // Use a percentage of the viewport height
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         border: "1px solid #ccc",
         cursor: "pointer",
     },
