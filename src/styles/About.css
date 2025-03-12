@@ -7,7 +7,7 @@
 }
 
 /* 1) Hero Section */
-.hero-section {
+.about-hero-section {
     position: relative;
     background: url('../assets/background2.jpeg') center center / cover no-repeat;
     height: 80vh;

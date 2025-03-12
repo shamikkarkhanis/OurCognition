@@ -1,11 +1,11 @@
 import React from 'react';
-import './About.css';
+import '../styles/About.css';
 
 export default function About() {
   return (
     <div className="about-page">
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="about-hero-section">
         <div className="hero-overlay">
           <div className="hero-content">
             <h1>We Transform Cognitive Research</h1>
