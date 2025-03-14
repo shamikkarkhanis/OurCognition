@@ -1,26 +1,41 @@
 /* Existing styles from your current App.css */
 #root {
-  width: 100%; /* Take up full width */
-  height: 100%; /* Take up full height */
-  margin: 0 auto; /* Center the content horizontally */
-  padding: 0; /* No extra padding */
-  text-align: center; /* Center text */
-  color-scheme: dark; /* Dark mode */
-  font-family: 'Arial', sans-serif; /* Use a more readable font */
-  background-color: #3c3c3c; /* Darker background */
-  color: white; /* White text for better contrast */
-  overflow: hidden; /* Prevent scrollbars */
+  width: 100%;
+  /* Take up full width */
+  height: 100%;
+  /* Take up full height */
+  margin: 0 auto;
+  /* Center the content horizontally */
+  padding: 0;
+  /* No extra padding */
+  text-align: center;
+  /* Center text */
+  color-scheme: dark;
+  /* Dark mode */
+  font-family: 'Arial', sans-serif;
+  /* Use a more readable font */
+  background-color: #3c3c3c;
+  /* Darker background */
+  color: white;
+  /* White text for better contrast */
+  overflow: hidden;
+  /* Prevent scrollbars */
 }
 
 .logo {
-  height: 2.5em; /* Adjust logo size */
-  width: auto; /* Maintain aspect ratio */
-  padding: 0.5em; /* Reduce excessive padding */
-  transition: none; /* Remove unnecessary effects */
+  height: 2.5em;
+  /* Adjust logo size */
+  width: auto;
+  /* Maintain aspect ratio */
+  padding: 0.5em;
+  /* Reduce excessive padding */
+  transition: none;
+  /* Remove unnecessary effects */
 }
 
 .logo:hover {
-  filter: none; /* Removes the glowing effect */
+  filter: none;
+  /* Removes the glowing effect */
 }
 
 .navbar-logo {
@@ -28,7 +43,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10; /* Ensure it's properly layered */
+  z-index: 10;
+  /* Ensure it's properly layered */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -37,7 +53,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) { 
+@media (prefers-color-scheme: dark) {
   /* REMOVE this section if you don't want auto dark mode */
 }
 
@@ -56,25 +72,34 @@
 .about,
 .contact {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
-  font-size: 2rem; /* Set a consistent font size */
-  height: 100vh; /* Full viewport height */
-  padding: 2rem; /* Add padding around content */
-  text-align: center; /* Ensure text is centered */
+  flex-direction: column;
+  /* Stack items vertically */
+  align-items: center;
+  /* Center items horizontally */
+  justify-content: center;
+  /* Center items vertically */
+  font-size: 2rem;
+  /* Set a consistent font size */
+  height: 100vh;
+  /* Full viewport height */
+  padding: 2rem;
+  /* Add padding around content */
+  text-align: center;
+  /* Ensure text is centered */
 }
 
 /* Content Section */
 .content {
   background: url('/images/img-2.jpg') center/cover no-repeat;
   color: #fff;
-  font-size: 3rem; /* Larger font for emphasis */
+  font-size: 3rem;
+  /* Larger font for emphasis */
 }
 
 /* About Section */
 .about {
-  background-color: #3498db; /* Solid background */
+  background-color: #3498db;
+  /* Solid background */
   color: #fff;
   font-size: 3rem;
   display: flex;
@@ -118,7 +143,8 @@
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 1rem;
-  color: #fff; /* Ensure readability */
+  color: #fff;
+  /* Ensure readability */
 }
 
 /* Section Subheadings */
@@ -151,5 +177,6 @@
 /* List Item Styling */
 .about-features-list li strong,
 .contact-list li strong {
-  color: #ff6347; /* Highlight important points */
+  color: #ff6347;
+  /* Highlight important points */
 }
