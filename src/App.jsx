@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer'; // Assuming you have a Footer component
+import Footer from './components/layout/Footer';
 import './styles/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="content-wrapper"> {/* Wrapper for content pages */}
+      <div className="content-wrapper"> 
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/content' element={<Content />} />
@@ -20,7 +20,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
         </Routes>
       </div>
-      <Footer /> {/* Footer visible on all pages */}
+      <Footer /> 
     </Router>
   );
 }
