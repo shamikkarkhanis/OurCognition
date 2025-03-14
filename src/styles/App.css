@@ -1,0 +1,182 @@
+/* Existing styles from your current App.css */
+#root {
+  width: 100%;
+  /* Take up full width */
+  height: 100%;
+  /* Take up full height */
+  margin: 0 auto;
+  /* Center the content horizontally */
+  padding: 0;
+  /* No extra padding */
+  text-align: center;
+  /* Center text */
+  color-scheme: dark;
+  /* Dark mode */
+  font-family: 'Arial', sans-serif;
+  /* Use a more readable font */
+  background-color: #3c3c3c;
+  /* Darker background */
+  color: white;
+  /* White text for better contrast */
+  overflow: hidden;
+  /* Prevent scrollbars */
+}
+
+.logo {
+  height: 2.5em;
+  /* Adjust logo size */
+  width: auto;
+  /* Maintain aspect ratio */
+  padding: 0.5em;
+  /* Reduce excessive padding */
+  transition: none;
+  /* Remove unnecessary effects */
+}
+
+.logo:hover {
+  filter: none;
+  /* Removes the glowing effect */
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  /* Ensure it's properly layered */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  /* REMOVE this section if you don't want auto dark mode */
+}
+
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Styles for pages */
+.home,
+.content,
+.about,
+.contact {
+  display: flex;
+  flex-direction: column;
+  /* Stack items vertically */
+  align-items: center;
+  /* Center items horizontally */
+  justify-content: center;
+  /* Center items vertically */
+  font-size: 2rem;
+  /* Set a consistent font size */
+  height: 100vh;
+  /* Full viewport height */
+  padding: 2rem;
+  /* Add padding around content */
+  text-align: center;
+  /* Ensure text is centered */
+}
+
+/* Content Section */
+.content {
+  background: url('/images/img-2.jpg') center/cover no-repeat;
+  color: #fff;
+  font-size: 3rem;
+  /* Larger font for emphasis */
+}
+
+/* About Section */
+.about {
+  background-color: #3498db;
+  /* Solid background */
+  color: #fff;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+/* Contact Section */
+.contact {
+  background: url('/images/img-8.jpg') center/cover no-repeat;
+  color: #fff;
+  font-size: 3rem;
+}
+
+/* Containers for About & Contact */
+.about-container,
+.contact-container {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* Headings */
+.about-heading,
+.contact-heading {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Descriptions */
+.about-description,
+.contact-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #fff;
+  /* Ensure readability */
+}
+
+/* Section Subheadings */
+.about-features-heading,
+.contact-inquiries-heading,
+.contact-research-heading {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  font-weight: bold;
+}
+
+/* Lists */
+.about-features-list,
+.contact-list {
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+}
+
+/* List Items */
+.about-features-list li,
+.contact-list li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  padding-left: 1rem;
+  position: relative;
+}
+
+/* List Item Styling */
+.about-features-list li strong,
+.contact-list li strong {
+  color: #ff6347;
+  /* Highlight important points */
+}
