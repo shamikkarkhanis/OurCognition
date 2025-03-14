@@ -1,5 +1,6 @@
 // Timeline.jsx
 
+import { color } from 'd3';
 import React, { useState } from 'react';
 
 const Timeline = ({ selection }) => {
