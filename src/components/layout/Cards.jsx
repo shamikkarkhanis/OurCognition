@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../styles/Cards.css';
 import CardItem from '../common/CardItem';
+import alzheimers_heatmap_example from '../../assets/alzheimers_heatmap_example.jpg';
+import nerve_cell_example from '../../assets/nerve_cell_example.jpg';
 
 function Cards() {
   return (
@@ -10,13 +12,13 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='src/assets/alzheimers_heatmap_example.jpg'
+              src={alzheimers_heatmap_example}
               text="Alzheimer's Disease Macro View"
               label='Macro'
               path='/Content'
             />
             <CardItem
-              src='src/assets/nerve_cell_example.jpg'
+              src={nerve_cell_example}
               text="Alzheimer's Disease Micro View"
               label='Micro'
               path='/Content'
