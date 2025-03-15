@@ -21,10 +21,11 @@ function Cards() {
               label='Micro'
               path='/Content'
             />
+
           </ul>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
