@@ -1,8 +1,10 @@
 .navbar {
   background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-  height: 70px; /* Adjusted navbar height */
+  height: 70px;
+  /* Adjusted navbar height */
   display: flex;
-  justify-content: space-between; /* Spacing between logo and menu */
+  justify-content: space-between;
+  /* Spacing between logo and menu */
   align-items: center;
   font-size: 1.1rem;
   position: sticky;
@@ -12,7 +14,8 @@
 
 .navbar-container {
   display: flex;
-  justify-content: center; /* Centering the menu */
+  justify-content: center;
+  /* Centering the menu */
   align-items: center;
   width: 100%;
   padding: 0 20px;
@@ -20,9 +23,13 @@
 }
 
 .navbar-logo {
-  color: #f3b5b8;
+  background: url('../assets/logo_form_pink.png') no-repeat;
+  background-size: contain;
+  width: 170px;
+  height: 70px;
   position: absolute;
-  left: 20px; /* Keeps logo on the left */
+  left: 20px;
+  /* Keeps logo on the left */
   justify-self: start;
   cursor: pointer;
   text-decoration: none;
@@ -33,7 +40,8 @@
 
 .logo {
   color: #f3b5b8;
-  height: 3em; /* Adjusted logo size */
+  height: 3em;
+  /* Adjusted logo size */
   padding: 0.8em;
 }
 
@@ -48,16 +56,21 @@
   grid-gap: 10px;
   list-style: none;
   text-align: center;
-  width: 50vw; /* Adjusted width */
-  justify-content: center; /* Centered the nav items */
-  margin-right: 0; /* Removed extra margin */
-  margin: 0 auto; /* Ensures proper centering */
+  width: 50vw;
+  /* Adjusted width */
+  justify-content: center;
+  /* Centered the nav items */
+  margin-right: 0;
+  /* Removed extra margin */
+  margin: 0 auto;
+  /* Ensures proper centering */
   padding: 0;
   width: fit-content;
 }
 
 .nav-item {
-  height: 70px; /* Adjusted to match navbar height */
+  height: 70px;
+  /* Adjusted to match navbar height */
 }
 
 .nav-links {
@@ -112,7 +125,8 @@
 
   .nav-links {
     text-align: center;
-    padding: 1.5rem; /* Reduced padding for a more compact layout */
+    padding: 1.5rem;
+    /* Reduced padding for a more compact layout */
     width: 100%;
     display: table;
   }
@@ -124,10 +138,12 @@
     border-radius: 4px;
     width: 80%;
     text-decoration: none;
-    font-size: 1.4rem; /* Slightly smaller font size */
+    font-size: 1.4rem;
+    /* Slightly smaller font size */
     background-color: transparent;
     color: #fff;
-    padding: 12px 18px; /* Adjusted padding */
+    padding: 12px 18px;
+    /* Adjusted padding */
     border: 1px solid #fff;
     transition: all 0.3s ease-out;
   }
