@@ -1,32 +1,28 @@
-// Content.jsx
-
 import { useState, useRef } from 'react';
 import ContentNavbar from '../components/layout/ContentNavbar.jsx';
 import BrainHeatmap from '../components/common/BrainHeatmap.jsx';
 import Timeline from '../components/layout/Timeline.jsx';
-
+import MicroTimeline from '../components/common/MicroTimeline.jsx';
+import { Button } from "../components/common/Button.jsx"; 
 
 function Content() {
     const [selection, setSelection] = useState('alzheimers');
-
+    const [showMicro, setShowMicro] = useState(false); // Toggle between Macro and Micro Timeline
     const [activeRegion, setActiveRegion] = useState(null);
     const [activeRegions, setActiveRegions] = useState({});
     const undulationIntervalId = useRef(null);
 
     // Function to start undulating color shades
     const undulateRegion = (regionId) => {
-        // Stop undulation for the currently active region, if any
         if (activeRegion) {
-            setActiveRegions((prev) => ({ ...prev, [activeRegion]: 0 })); // Reset the previous region's activity
+            setActiveRegions((prev) => ({ ...prev, [activeRegion]: 0 }));
             if (undulationIntervalId.current) {
-                clearInterval(undulationIntervalId.current); // Clear the interval for the previous region
+                clearInterval(undulationIntervalId.current);
             }
         }
 
-        // Set the new active region
         setActiveRegion(regionId);
 
-        // Start undulation for the new region
         const intervalTime = 100; // Time between each shade change (ms)
         const newIntervalId = setInterval(() => {
             setActiveRegions((prev) => {
@@ -35,7 +31,6 @@ function Content() {
             });
         }, intervalTime);
 
-        // Store the new interval ID in the ref
         undulationIntervalId.current = newIntervalId;
     };
 
@@ -50,10 +45,17 @@ function Content() {
                         activeRegions={activeRegions} />
                 </div>
                 <div style={styles.timelineContainer}>
-                    <Timeline
-                        selection={selection}
-                        triggerUndulation={undulateRegion} />
-
+                    {/* Toggle Button */}
+                    <Button onClick={() => setShowMicro(!showMicro)} style={styles.toggleButton}>
+                        {showMicro ? 'Show Macro Timeline' : 'Show Micro Timeline'}
+                    </Button>
+                    
+                    {/* Conditional Rendering of Timelines */}
+                    {showMicro ? (
+                        <MicroTimeline triggerUndulation={undulateRegion} />
+                    ) : (
+                        <Timeline selection={selection} triggerUndulation={undulateRegion} />
+                    )}
                 </div>
             </div>
         </div>
@@ -83,6 +85,11 @@ const styles = {
         backgroundColor: '#1c1c1e',
         borderRadius: '10px',
         padding: '20px',
+        position: 'relative',
+    },
+    toggleButton: {
+        marginBottom: '10px',
+        width: '100%',
     },
 };
 

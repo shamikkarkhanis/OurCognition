@@ -9,14 +9,15 @@ function HeroSection() {
       <div className="hero-logo"></div>
       <p>Exploring the complexities of Alzheimer's disease and cognitive health</p>
       <div className='hero-btns'>
-        <Button
-          className='btns'
-          buttonStyle='btn--outline'
-          buttonSize='btn--large'
-          onClick={() => window.location.href = '/content'} // Redirect to the content page
-        >
-          LEARN MORE
-        </Button>
+      <Button
+  className='btns'
+  buttonStyle='btn--outline'
+  buttonSize='btn--large'
+  to='/content' // Instead of onClick
+>
+  LEARN MORE
+</Button>
+
       </div>
     </div>
   );
