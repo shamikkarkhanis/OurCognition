@@ -2,7 +2,6 @@
 
 import { useState, useRef } from 'react';
 import ContentNavbar from '../components/layout/ContentNavbar.jsx';
-import BrainHeatmap from '../components/common/BrainHeatmap.jsx'; //! Depreceated
 import BrainMap from '../components/layout/BrainHeatmap.jsx'
 import Timeline from '../components/layout/Timeline.jsx';
 
