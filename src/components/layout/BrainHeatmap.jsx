@@ -57,6 +57,34 @@ const BrainMap = React.memo(() => {
         }));
     }, []);
 
+    // Create and manage tooltips for brain regions
+    const handleMouseEnter = useCallback((e, region) => {
+        // Create tooltip element
+        const tooltip = document.createElement('div');
+        tooltip.style.position = 'absolute';
+        tooltip.style.left = `${e.clientX + 10}px`;
+        tooltip.style.top = `${e.clientY + 10}px`;
+        tooltip.style.padding = '5px';
+        tooltip.style.background = '#333';
+        tooltip.style.color = 'white';
+        tooltip.style.borderRadius = '3px';
+        tooltip.style.fontSize = '12px';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.textContent = region.name || region.id;
+        document.body.appendChild(tooltip);
+
+        // Store tooltip reference
+        e.target.tooltip = tooltip;
+    }, []);
+
+    // Remove tooltip on mouse leave
+    const handleMouseLeave = useCallback((e) => {
+        if (e.target.tooltip) {
+            e.target.tooltip.remove();
+            e.target.tooltip = null;
+        }
+    }, []);
+
     // Current phase based on animation time
     const phase = calculatePhase(animationTime);
 
@@ -122,10 +150,14 @@ const BrainMap = React.memo(() => {
                                     e.target.style.strokeWidth = "1";
                                     // Move this element to the front for better visibility
                                     e.target.parentNode.appendChild(e.target);
+                                    // Add tooltip label
+                                    handleMouseEnter(e, region);
                                 }}
                                 onMouseLeave={(e) => {
                                     e.target.style.stroke = "none";
                                     e.target.style.strokeWidth = "0";
+                                    // Remote tooltip label
+                                    handleMouseLeave(e);
                                 }}
                             />
                         </g>
