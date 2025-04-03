@@ -1,0 +1,38 @@
+.container {
+    text-align: center;
+    margin: 0 auto;
+    background-color: rgb(28, 28, 28);
+}
+
+.svg-wrapper {
+    display: inline-block;
+    position: relative;
+    /* So that the tooltip is positioned relative to this container */
+    margin: 10px;
+    /* Optional: space between regions */
+}
+
+.region-wrapper {
+    position: relative;
+    /* Enables pseudo-element positioning */
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* CSS tooltip using ::after on the HTML wrapper */
+.region-wrapper:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -25px;
+    /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 99;
+}

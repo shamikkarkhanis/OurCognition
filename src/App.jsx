@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Content from './pages/Content';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import BrainMap from "./components/layout/BrainHeatmap";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
         </Routes>
       </div>
-      <Footer /> {/* Footer visible on all pages */}
+      <Footer />
     </Router>
   );
 }

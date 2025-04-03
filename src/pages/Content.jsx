@@ -45,10 +45,6 @@ function Content() {
             <ContentNavbar setSelection={setSelection} />
             <div style={styles.content}>
                 <div style={styles.heatmapContainer}>
-                    {/* <BrainHeatmap
-                        selection={selection}
-                        undulateRegion={undulateRegion}
-                        activeRegions={activeRegions} /> */}
                     <BrainMap />
 
                 </div>
