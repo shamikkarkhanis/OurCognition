@@ -9,3 +9,4 @@ const brainRegionsBase = [
 ];
 
 export default brainRegionsBase;
+

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { hslToRgb } from '../utils/colorUtils';
 import '../../styles/BrainHeatmap.css';
-import brainRegionsBase from '../common/BrainRegionsBase'
+import brainRegionsBase from '../common/BrainRegionsBase.jsx'
 
 /**
  * BrainMap - Interactive brain region visualization component
