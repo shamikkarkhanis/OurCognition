@@ -29,18 +29,6 @@ function Content() {
     // Store multiple active regions with their activation values
     const [activeRegions, setActiveRegions] = useState({});
 
-    // Reference to store interval ID for animation effects
-    const undulationIntervalId = useRef(null);
-
-    // Clean up any intervals when component unmounts
-    useEffect(() => {
-        return () => {
-            if (undulationIntervalId.current) {
-                clearInterval(undulationIntervalId.current);
-            }
-        };
-    }, []);
-
     // Handle region selection
     const handleRegionSelect = (region) => {
         setActiveRegion(region);
