@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Content from './pages/Content';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import MicroSimPage from './pages/MicroSimPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/content' element={<Content />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/sim' element={<MicroSimPage />} />
         </Routes>
       </div>
       <Footer /> 
