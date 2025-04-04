@@ -1,485 +1,181 @@
-// Timeline.jsx
+import React, { useState, useEffect } from 'react';
+import '../../styles/Timeline.css';
 
-import React, { useState } from 'react';
-
-const Timeline = ({ selection }) => { // ! func to set selected region through timeline 
+/**
+ * Timeline Component
+ * Displays a sequence of Alzheimer's disease progression stages.
+ * Each stage highlights associated brain regions and descriptive details.
+ */
+const Timeline = ({ selection, setActiveRegions }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    // Alzheimer's timeline data
     const alzheimers_events = [
         {
             title: "Introduction to Alzheimer's Disease",
             description: "Alzheimer's is a progressive neurodegenerative disorder that gradually destroys memory and cognitive function.",
-            brain_region: ['hippocampus'],
+            brain_region: ['hippocampus', 'entorhinal-cortex'],
             details: [
-                'Beta-amyloid plaques → tau tangles → neuron death.',
-                'Neuron loss → brain tissue shrinkage in affected areas.',
-                'Starts in memory centers (e.g., hippocampus) → spreads to other regions.'
+                'Alzheimer’s starts in the entorhinal cortex and hippocampus — centers of memory formation.',
+                'Beta-amyloid plaques and tau tangles accumulate → neuron death begins.',
+                'Neuron loss leads to shrinkage in affected brain areas.'
             ]
         },
         {
-            title: 'Memory Loss',
-            description: 'Forgetting recently learned information is one of the earliest symptoms of Alzheimer’s.',
-            brain_region: ['hippocampus'],
+            title: "Memory Loss",
+            description: "Forgetting recently learned information is one of the earliest and most common symptoms.",
+            brain_region: ['hippocampus', 'temporal-lobe'],
             details: [
-                'Hippocampus → forms and consolidates new memories.',
-                'Plaques and tangles → hippocampus damage → impaired short-term memory.',
-                'Progression → widespread memory loss across the brain.'
+                'The hippocampus helps form and consolidate new memories.',
+                'The temporal lobe stores sensory input and contextual memory.',
+                'As damage spreads, short-term memory and recall worsen.'
             ]
         },
         {
-            title: 'Difficulty Planning or Solving Problems',
-            description: 'Alzheimer’s impairs higher-order cognitive functions like planning and problem-solving.',
-            brain_region: ['pfc'],
+            title: "Difficulty Planning or Solving Problems",
+            description: "Higher-order cognitive functions like planning and problem-solving become impaired.",
+            brain_region: ['prefrontal-cortex'],
             details: [
-                'PFC → manages reasoning, planning, and organization.',
-                'Disrupted PFC connections → poor task management → difficulty solving problems.',
-                'Symptoms → trouble handling numbers, following steps, or making decisions.'
+                'The prefrontal cortex (PFC) manages executive function: planning, organization, reasoning.',
+                'Alzheimer’s disrupts neural circuits in the PFC.',
+                'Symptoms include poor judgment, disorganization, and trouble following steps.'
             ]
         },
         {
-            title: 'Confusion with Time or Place',
-            description: 'Individuals lose track of time, dates, or familiar locations as Alzheimer’s progresses.',
-            brain_region: ['parietal-lobe'],
+            title: "Confusion with Time or Place",
+            description: "Patients begin to lose track of time, dates, and familiar places.",
+            brain_region: ['parietal-lobe', 'retrosplenial-cortex'],
             details: [
-                'Parietal lobe → processes spatial awareness and temporal orientation.',
-                'Damage → disorientation → confusion about current events and surroundings.',
-                'Symptoms → difficulty recognizing familiar places or navigating environments.'
+                'The parietal lobe integrates spatial awareness and orientation.',
+                'The retrosplenial cortex helps with temporal sequencing and navigation.',
+                'Damage leads to confusion about current events and getting lost.'
             ]
         },
         {
-            title: 'Challenges in Completing Familiar Tasks',
-            description: 'Daily tasks, such as managing a budget or driving, become increasingly difficult.',
-            brain_region: ['temporal-lobe', 'parietal-lobe'],
+            title: "Challenges in Completing Familiar Tasks",
+            description: "Daily tasks, such as cooking or managing finances, become increasingly difficult.",
+            brain_region: ['temporal-lobe', 'parietal-lobe', 'frontal-lobe'],
             details: [
-                'Temporal lobe → processes sensory input, language, and memory.',
-                'Parietal lobe → coordinates spatial reasoning and motor planning.',
-                'Alzheimer’s disrupts these areas → difficulty with routine and familiar activities.'
+                'Temporal lobe: language and auditory processing.',
+                'Parietal lobe: motor planning and visual-spatial coordination.',
+                'Frontal lobe: sequencing and decision-making.',
+                'Disruption across these regions causes problems with task completion.'
             ]
         },
         {
-            title: 'Changes in Mood and Personality',
-            description: 'Alzheimer’s leads to mood swings and personality changes, such as anxiety or suspicion.',
-            brain_region: ['amygdala', 'pfc'],
+            title: "Changes in Mood and Personality",
+            description: "Noticeable mood swings, depression, anxiety, or suspiciousness may develop.",
+            brain_region: ['amygdala', 'prefrontal-cortex', 'anterior-cingulate-cortex'],
             details: [
-                'Amygdala → emotional regulation → damage → heightened anxiety and irritability.',
-                'PFC dysfunction → reduced emotional control → unpredictable mood swings.',
-                'Behavioral changes → confusion, withdrawal, or suspicion toward others.'
+                'Amygdala → processes fear, anxiety, and emotional memory.',
+                'PFC → regulates impulse control and emotional response.',
+                'Anterior cingulate → involved in empathy, attention, and mood regulation.',
+                'Damage here contributes to irritability, apathy, or paranoia.'
+            ]
+        },
+        {
+            title: "Loss of Physical Function",
+            description: "In late stages, physical abilities such as walking, swallowing, and bladder control decline.",
+            brain_region: ['motor-cortex', 'brainstem'],
+            details: [
+                'Motor cortex controls voluntary movement; damage leads to stiffness or inability to walk.',
+                'Brainstem functions like swallowing and breathing may eventually be impaired.',
+                'This stage requires full-time care.'
             ]
         }
     ];
 
+    // Only supporting Alzheimer's for now
+    const events = selection === "alzheimers" ? alzheimers_events : [];
 
-    const anxiety_events = [
-        {
-            title: 'Introduction to Anxiety',
-            description: 'Anxiety is a complex emotional and physiological response affecting multiple brain regions and systems.',
-            brain_region: ['hypothalamus', 'amygdala', 'pfc', 'basal-ganglia', 'brainstem'],
-            details: [
-                'Interconnected neural circuits → heightened arousal, worry, and vigilance.',
-                'Cognitive effects → poor focus, memory issues, and impaired decision-making.',
-                'Understanding anxiety → better coping strategies and treatments.'
-            ]
-        },
-        {
-            title: 'Increased Cortisol Levels',
-            description: 'Anxiety elevates cortisol, impairing cognitive functions like attention and memory.',
-            brain_region: ['hypothalamus'],
-            details: [
-                'Hypothalamus → HPA axis → cortisol release.',
-                'Chronic cortisol → hippocampus damage → impaired memory.',
-                'Excess cortisol → prefrontal cortex disruption → poor concentration.'
-            ]
-        },
-        {
-            title: 'Heightened Amygdala Activity',
-            description: 'Anxiety activates the amygdala, amplifying fear and emotional responses.',
-            brain_region: ['amygdala'],
-            details: [
-                'Amygdala → processes threats → initiates fight-or-flight.',
-                'Hyperactivity → exaggerated fear → reduced prefrontal cortex control.',
-                'Weakened regulation → emotional dysregulation and avoidance behaviors.'
-            ]
-        },
-        {
-            title: 'Reduced Prefrontal Cortex Function',
-            description: 'Anxiety diminishes the prefrontal cortex, impairing reasoning and self-control.',
-            brain_region: ['pfc'],
-            details: [
-                'PFC → rational thinking and emotional regulation.',
-                'Reduced PFC → weaker control over amygdala → heightened reactivity.',
-                'Impaired focus → poor problem-solving and decision-making.'
-            ]
-        },
-        {
-            title: 'Altered Neurotransmitter Balance',
-            description: 'Anxiety disrupts serotonin, dopamine, and GABA levels, affecting mood and cognition.',
-            brain_region: ['basal-ganglia'],
-            details: [
-                'Basal ganglia → mood regulation and habits.',
-                'Low serotonin → irritability and emotional instability.',
-                'Dopamine imbalance → reduced motivation and pleasure.',
-                'Low GABA → increased neural excitability → heightened anxiety.'
-            ]
-        },
-        {
-            title: 'Increased Heart Rate and Blood Pressure',
-            description: 'Physical symptoms of anxiety impair cognitive focus and increase fatigue.',
-            brain_region: ['brainstem'],
-            details: [
-                'Brainstem → autonomic functions (e.g., heart rate, blood pressure).',
-                'Sympathetic nervous system → physical arousal (e.g., rapid heartbeat).',
-                'Chronic activation → reduced oxygen to brain → poor focus and clarity.'
-            ]
-        },
-        {
-            title: 'Disrupted Sleep Patterns',
-            description: 'Anxiety leads to poor sleep, worsening cognitive and emotional regulation.',
-            brain_region: ['thalamus', 'brainstem'],
-            details: [
-                'Thalamus/brainstem → regulate sleep-wake cycles.',
-                'Anxiety → fragmented sleep → impaired memory and focus.',
-                'Sleep disruption → worsened emotional regulation and stress.'
-            ]
+    // Updates the active brain regions for the current event
+    const updateActiveRegions = (regions) => {
+        if (!regions || regions.length === 0) {
+            return;
         }
-    ];
-
-
-    const depression_events = [
-        {
-            title: 'Introduction to Depression',
-            description: 'Depression is a mood disorder characterized by persistent feelings of sadness, hopelessness, and loss of interest.',
-            brain_region: ['pfc', 'amygdala', 'hippocampus'],
-            details: [
-                'Depression involves changes in neural circuits that regulate mood, emotion, and cognition.',
-                'Chronic depression can lead to physical changes in brain structure and function.',
-                'Understanding depression helps improve treatments and therapies.'
-            ]
-        },
-        {
-            title: 'Reduced Activity in the Prefrontal Cortex',
-            description: 'Depression often results in reduced activity in the prefrontal cortex, impairing executive functions.',
-            brain_region: ['pfc'],
-            details: [
-                'The prefrontal cortex is crucial for decision-making, focus, and impulse control.',
-                'Depression diminishes the PFC’s role in regulating emotions and planning.',
-                'Leads to difficulty concentrating, making decisions, and managing stress.'
-            ]
-        },
-        {
-            title: 'Hyperactivity in the Amygdala',
-            description: 'Depression increases activity in the amygdala, heightening negative emotions and stress responses.',
-            brain_region: ['amygdala'],
-            details: [
-                'The amygdala governs emotional reactions and threat detection.',
-                'In depression, overactivity amplifies feelings of fear, sadness, and hopelessness.',
-                'This imbalance makes it harder to experience positive emotions.'
-            ]
-        },
-        {
-            title: 'Hippocampal Atrophy',
-            description: 'Chronic depression can lead to shrinkage of the hippocampus, affecting memory and learning.',
-            brain_region: ['hippocampus'],
-            details: [
-                'The hippocampus is critical for memory formation and stress regulation.',
-                'Prolonged exposure to stress hormones, like cortisol, can damage hippocampal neurons.',
-                'Hippocampal atrophy is linked to memory issues and emotional dysregulation in depression.'
-            ]
-        },
-        {
-            title: 'Imbalances in Neurotransmitters',
-            description: 'Depression is associated with imbalances in neurotransmitters like serotonin, dopamine, and norepinephrine.',
-            brain_region: ['basal-ganglia'],
-            details: [
-                'The basal ganglia play a role in mood, reward processing, and motor control.',
-                'Low levels of serotonin and dopamine contribute to feelings of sadness and lack of motivation.',
-                'These imbalances are often targeted by antidepressant medications.'
-            ]
-        },
-        {
-            title: 'Disruption of Sleep and Circadian Rhythms',
-            description: 'Depression disrupts sleep patterns, causing insomnia or hypersomnia and affecting overall brain health.',
-            brain_region: ['hypothalamus'],
-            details: [
-                'The hypothalamus regulates circadian rhythms and sleep-wake cycles.',
-                'Depression can cause irregularities in melatonin production and sleep quality.',
-                'Poor sleep exacerbates symptoms of depression, creating a negative feedback loop.'
-            ]
-        },
-        {
-            title: 'Decreased Connectivity in Neural Networks',
-            description: 'Depression reduces connectivity between key brain regions, impairing emotional regulation and cognitive processing.',
-            brain_region: ['pfc', 'amygdala', 'hippocampus'],
-            details: [
-                'Disruptions in neural communication weaken the ability to regulate emotions.',
-                'This disconnection contributes to feelings of isolation and difficulty coping.',
-                'Improving connectivity through therapy or medication can alleviate symptoms.'
-            ]
-        }
-    ];
-
-    const bipolar_events = [
-        {
-            title: 'Introduction to Bipolar Disorder',
-            description: 'Bipolar disorder is marked by extreme mood swings, including episodes of mania and depression.',
-            brain_region: ['pfc', 'amygdala', 'hippocampus', 'basal-ganglia'],
-            details: [
-                'Dysregulation of mood → affects energy, cognition, and behavior.',
-                'Alternates between depression and mania → impacts multiple brain regions.',
-                'Understanding mechanisms → improves therapies.'
-            ]
-        },
-        {
-            title: 'Reduced Prefrontal Cortex Function in Depressive States',
-            description: 'Depressive episodes impair the PFC, affecting decision-making and emotion regulation.',
-            brain_region: ['pfc'],
-            details: [
-                'PFC → regulates planning, focus, and emotion control.',
-                'Depressive states → reduced PFC activity → impaired decision-making.',
-                'Leads to indecisiveness, hopelessness, and difficulty focusing.'
-            ]
-        },
-        {
-            title: 'Increased Amygdala Activity in Manic States',
-            description: 'Manic episodes heighten amygdala activity, increasing impulsivity and emotional reactivity.',
-            brain_region: ['amygdala'],
-            details: [
-                'Amygdala → processes emotional stimuli and reactions.',
-                'Hyperactivity → heightened emotions → impulsive behaviors.',
-                'Contributes to risky actions and difficulty regulating emotions.'
-            ]
-        },
-        {
-            title: 'Hippocampal Changes and Mood Dysregulation',
-            description: 'Structural and functional changes in the hippocampus disrupt mood regulation.',
-            brain_region: ['hippocampus'],
-            details: [
-                'Hippocampus → governs memory and emotional control.',
-                'Bipolar disorder → hippocampal atrophy → impaired regulation.',
-                'Linked to memory loss during depressive and manic episodes.'
-            ]
-        },
-        {
-            title: 'Altered Neurotransmitter Activity',
-            description: 'Neurotransmitter imbalances affect mood, energy, and behavior in bipolar disorder.',
-            brain_region: ['basal-ganglia'],
-            details: [
-                'Basal ganglia → regulate mood and reward processing.',
-                'Mania → high dopamine levels; depression → low dopamine levels.',
-                'Dysregulation → mood instability and behavioral shifts.'
-            ]
-        },
-        {
-            title: 'Irregular Circadian Rhythms',
-            description: 'Disrupted sleep patterns worsen mood swings in bipolar disorder.',
-            brain_region: ['hypothalamus'],
-            details: [
-                'Hypothalamus → controls sleep-wake cycles and circadian rhythms.',
-                'Disruptions → insomnia or hypersomnia → exacerbates mood episodes.',
-                'Stabilizing sleep rhythms → helps manage symptoms.'
-            ]
-        },
-        {
-            title: 'Connectivity Imbalances in Neural Networks',
-            description: 'Impaired connectivity between brain regions impacts emotional regulation.',
-            brain_region: ['pfc', 'amygdala', 'hippocampus'],
-            details: [
-                'Poor connectivity → reduced control over mood and emotions.',
-                'Manic/depressive episodes → worsen imbalances in connectivity.',
-                'Therapies → focus on restoring neural communication.'
-            ]
-        },
-        {
-            title: 'Heightened Risk of Stress-Induced Episodes',
-            description: 'Stress increases vulnerability to manic or depressive episodes in bipolar disorder.',
-            brain_region: ['hypothalamus', 'amygdala'],
-            details: [
-                'Stress → activates hypothalamic-pituitary-adrenal (HPA) axis.',
-                'HPA activation → amygdala hyperactivity → amplifies stress responses.',
-                'Stress management → essential for stabilizing mood.'
-            ]
-        }
-    ];
-
-
-    const schizophrenia_events = [
-        {
-            title: 'Introduction to Schizophrenia',
-            description: 'Schizophrenia is a chronic brain disorder causing delusions, hallucinations, and cognitive impairments.',
-            brain_region: ['pfc', 'amygdala', 'hippocampus', 'basal-ganglia', 'thalamus'],
-            details: [
-                'Disrupted brain signaling → neurotransmitter imbalances.',
-                'Positive symptoms (hallucinations) → negative symptoms (reduced emotional expression).',
-                'Focus on affected brain regions → targeted treatments.'
-            ]
-        },
-        {
-            title: 'Reduced Prefrontal Cortex Activity',
-            description: 'Decreased activity in the prefrontal cortex impairs cognitive and executive functions.',
-            brain_region: ['pfc'],
-            details: [
-                'PFC governs decision-making → planning and rational thought.',
-                'Hypofrontality → disorganized thoughts + impaired focus.',
-                'Underactivity → difficulty solving problems.'
-            ]
-        },
-        {
-            title: 'Hyperactivity in the Amygdala',
-            description: 'Amygdala hyperactivity → paranoia + emotional dysregulation.',
-            brain_region: ['amygdala'],
-            details: [
-                'Processes emotions + threat detection → heightened fear.',
-                'Overactivation → suspicion + exaggerated reactions.',
-                'Contributes to paranoia symptoms.'
-            ]
-        },
-        {
-            title: 'Hippocampal Atrophy and Memory Impairments',
-            description: 'Structural changes in the hippocampus impair memory and learning.',
-            brain_region: ['hippocampus'],
-            details: [
-                'Hippocampus forms + recalls memories → spatial navigation.',
-                'Atrophy → disrupted memory formation.',
-                'Linked to cognitive deficits in schizophrenia.'
-            ]
-        },
-        {
-            title: 'Basal Ganglia Dysregulation',
-            description: 'Basal ganglia dysfunction → motor issues + repetitive behaviors.',
-            brain_region: ['basal-ganglia'],
-            details: [
-                'Regulates motor control → reward processing.',
-                'Dysregulation → motor abnormalities (e.g., catatonia).',
-                'Contributes to repetitive actions + initiation challenges.'
-            ]
-        },
-        {
-            title: 'Disrupted Thalamic Connectivity',
-            description: 'Thalamus connectivity changes → sensory distortions + hallucinations.',
-            brain_region: ['thalamus'],
-            details: [
-                'Thalamus relays sensory input → cortex integration.',
-                'Disruptions → distorted perception → hallucinations.',
-                'Linked to positive symptoms like delusions.'
-            ]
-        },
-        {
-            title: 'Imbalance in Dopamine Transmission',
-            description: 'Dopamine overactivity in the mesolimbic pathway drives positive symptoms.',
-            brain_region: ['pfc', 'basal-ganglia', 'amygdala'],
-            details: [
-                'Excess dopamine → hallucinations + delusions.',
-                'Low dopamine in PFC → cognitive deficits.',
-                'Antipsychotic treatments target dopamine balance.'
-            ]
-        },
-        {
-            title: 'Disrupted Default Mode Network (DMN)',
-            description: 'Schizophrenia affects the DMN, impairing self-referential thought.',
-            brain_region: ['pfc', 'hippocampus'],
-            details: [
-                'DMN → active during introspection → self-referential thinking.',
-                'Disruptions → difficulty distinguishing internal from external stimuli.',
-                'Leads to delusions + distorted reality perception.'
-            ]
-        },
-        {
-            title: 'Cortical Thinning and Connectivity Issues',
-            description: 'Cortical thinning + reduced connectivity affect cognition + processing.',
-            brain_region: ['pfc', 'hippocampus', 'thalamus'],
-            details: [
-                'Thinning → slower processing speed + reduced flexibility.',
-                'Impaired regional communication → symptom complexity.',
-                'Reduced connectivity intensifies schizophrenia effects.'
-            ]
-        }
-    ];
-
-
-    const filler_events = [
-        {
-            title: 'No Event Selected',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.',
-            brain_region: ['hypothalamus', 'amygdala', 'pfc', 'basal-ganglia', 'brainstem'],
-            details: [
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'Suspendisse varius enim in eros elementum tristique.',
-                'Proin euismod, nisi vel consectetur elementum, nisi velit pulvinar nisl, eget fermentum augue arcu quis velit.'
-            ]
-        }
-    ];
-
-
-    const events = selection === "alzheimers"
-        ? alzheimers_events
-        : selection === "anxiety"
-            ? anxiety_events
-            : selection === "depression"
-                ? depression_events
-                : selection == "bipolar"
-                    ? bipolar_events
-                    : selection === "schizophrenia"
-                        ? schizophrenia_events
-                        : filler_events;
-
-
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % events.length);
-        const regions = events[(currentIndex + 1) % events.length].brain_region;
+        setActiveRegions({});
         regions.forEach((region, index) => {
-            setTimeout(() => {
-                triggerUndulation(region);
-            }, index * 2100); // 2.1 seconds for each region
+            setActiveRegions((prev) => ({ ...prev, [region]: index + 1 }));
         });
-
     };
 
-    return (
-        <div style={styles.timeline}>
-            <h2 style={styles.heading}>Timeline</h2>
-            <div style={styles.progressIndicator}>
-                <span>{currentIndex + 1} of {events.length}</span>
-            </div> <br />
-            <div style={styles.eventItem}>
-                <strong>{events[currentIndex].title}:</strong> {events[currentIndex].description} <br />
-                <br />
-                <strong> Region: </strong> {Array.isArray(events[currentIndex].brain_region) ?
-                    events[currentIndex].brain_region.map(region => region.charAt(0).toUpperCase() + region.slice(1)).join(', ') :
-                    events[currentIndex].brain_region.toUpperCase()}
-                <br />
-                <br />
-                <em><strong>Details:</strong></em>
-                <ul>
-                    {events[currentIndex].details.map((detail, index) => (
-                        <li key={index}>{detail}</li>
-                    ))}
-                </ul>
-            </div>
-            <button onClick={handleNext} style={styles.nextButton}>
-                Next →
-            </button>
+    // Automatically update regions on slide change
+    useEffect(() => {
+        if (events.length > 0) {
+            updateActiveRegions(events[currentIndex].brain_region);
+        }
+    }, [currentIndex]);
 
+    // Navigate to the next stage
+    const handleNext = () => {
+        if (events.length === 0) {
+            return;
+        }
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % events.length);
+    };
+
+    // Navigate to the previous stage
+    const handleBack = () => {
+        if (events.length === 0) {
+            return;
+        }
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + events.length) % events.length);
+    };
+
+    // Reset timeline to the beginning
+    const handleReset = () => {
+        setCurrentIndex(0);
+        setActiveRegions({});
+    };
+
+    if (events.length === 0) {
+        return <div className="timeline-container">No events available for this selection.</div>;
+    }
+
+    const currentEvent = events[currentIndex];
+
+    return (
+        <div className="timeline-container">
+            <div className="timeline-header">
+                <h2 className="timeline-title">{currentEvent.title}</h2>
+                <div className="stage-progress">{currentIndex + 1}/{events.length}</div>
+            </div>
+
+            <div className="timeline-content">
+                <p className="timeline-description">{currentEvent.description}</p>
+
+                <div className="timeline-region">
+                    <strong>Region: </strong>
+                    {Array.isArray(currentEvent.brain_region)
+                        ? currentEvent.brain_region.map(region =>
+                            region.charAt(0).toUpperCase() + region.slice(1)
+                        ).join(', ')
+                        : currentEvent.brain_region.toUpperCase()}
+                </div>
+
+                <div className="timeline-details">
+                    <strong>Details:</strong>
+                    <ul className="event-list">
+                        {currentEvent.details.map((detail, index) => (
+                            <li key={index} className="event-item">{detail}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+
+            <div className="timeline-buttons">
+                <button onClick={handleBack} className="back-button">
+                    ← Back
+                </button>
+                <button onClick={handleReset} className="reset-button">
+                    Reset
+                </button>
+                <button onClick={handleNext} className="next-button">
+                    Next →
+                </button>
+            </div>
         </div>
     );
-};
-
-const styles = {
-    timeline: {
-        padding: '10px',
-        borderRadius: '10px',
-        color: 'white',
-    },
-    heading: {
-        color: 'white',
-        marginBottom: '15px',
-    },
-    eventList: {
-        listStyleType: 'none',
-        padding: 0,
-    },
-    eventItem: {
-        marginBottom: '10px',
-        color: '#ccc',
-    },
 };
 
 export default Timeline;

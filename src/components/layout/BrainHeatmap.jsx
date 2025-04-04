@@ -9,11 +9,9 @@ import brainRegionsBase from '../common/BrainRegionsBase'
  * Displays brain regions that pulse with color animations and can be toggled
  * between "cool" and "warm" states through user interaction.
  */
-const BrainMap = React.memo(() => {
+const BrainMap = React.memo(({ selectedRegions }) => {
     // State for animation timing
     const [animationTime, setAnimationTime] = useState(0);
-    // Track which regions are in "warm" mode (toggled by clicking)
-    const [selectedRegions, setSelectedRegions] = useState({});
 
     // Animation constants
     const ANIMATION_PERIOD = 5000; // 5-second cycle for color oscillation
