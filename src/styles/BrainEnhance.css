@@ -1,0 +1,12 @@
+.brain-enhance {
+    background-color: #f0f8ff;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.brain-enhance h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}

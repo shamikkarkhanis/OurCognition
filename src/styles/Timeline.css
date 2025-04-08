@@ -1,12 +1,8 @@
+/*! NEED TO GENERALIZE THIS */
+
 /* Overall container styling */
 .timeline-container {
     flex: 1;
-    /* match sim container */
-    background-color: #1c1c1e;
-    border-radius: 16px;
-    padding: 24px;
-    color: #e0e0e0;
-    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -108,4 +104,35 @@
 .timeline-buttons button:hover {
     background-color: #3a45c2;
     transform: scale(1.03);
+}
+
+.description-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Base state: off screen */
+.brain-enhance-panel {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: #1c1c1e;
+    transition: transform 0.4s ease-in-out;
+    transform: translateX(100%);
+    z-index: 5;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Slide in */
+.brain-enhance-panel.active {
+    transform: translateX(0);
+}
+
+/* Timeline stays behind, not grayed */
+.timeline-content {
+    position: relative;
+    z-index: 1;
 }

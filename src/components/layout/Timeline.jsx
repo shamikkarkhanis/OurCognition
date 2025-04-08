@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/Timeline.css';
 import alzheimersEvents from '../common/AlzheimersEvents.jsx';
+import { createStaticRouter } from 'react-router-dom';
 
 /**
  * Timeline Component
@@ -11,7 +12,7 @@ const Timeline = ({ selection, setActiveRegions }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     // Only supporting Alzheimer's for now
-    const events = selection === "alzheimers" ? alzheimersEvents : [];
+    const events = "alzheimers" ? alzheimersEvents : [];
 
     // Updates the active brain regions for the current event
     const updateActiveRegions = (regions) => {
@@ -44,7 +45,11 @@ const Timeline = ({ selection, setActiveRegions }) => {
         if (events.length === 0) {
             return;
         }
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + events.length) % events.length);
+        if (!(currentIndex === 0)) {
+            setCurrentIndex((prevIndex) => (prevIndex - 1 + events.length) % events.length);
+            return true
+        }
+        return false
     };
 
     // Reset timeline to the beginning
@@ -89,7 +94,7 @@ const Timeline = ({ selection, setActiveRegions }) => {
             </div>
 
             <div className="timeline-buttons">
-                <button onClick={handleBack} className="back-button">
+                <button onClick={handleBack} className="back-button" style={{ backgroundColor: (currentIndex > 0 && events.length > 0) ? '#4a56e2' : '#888' }}>
                     ← Back
                 </button>
                 <button onClick={handleReset} className="reset-button">

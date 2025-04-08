@@ -10,21 +10,21 @@
 .content-body {
     display: flex;
     gap: 20px;
-    margin-top: 20px;
-    align-items: stretch;
-    /* <-- this ensures both sides match in height */
+    height: calc(50vh - 80px);
 }
 
 /* Shared panel styles */
 .sim-container,
-.timeline-container {
+.description-container {
     flex: 1;
-    height: 100%;
     display: flex;
     flex-direction: column;
     background-color: #1c1c1e;
     border-radius: 16px;
     padding: 20px;
     overflow: hidden;
-    /* Optional: helps contain floating heights */
+    height: 100%;
+    /* Ensure it fills parent flex height */
+    box-sizing: border-box;
+    /* Makes padding consistent */
 }

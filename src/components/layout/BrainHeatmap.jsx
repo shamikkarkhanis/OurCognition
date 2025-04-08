@@ -9,7 +9,7 @@ import brainRegionsBase from '../common/BrainRegionsBase.jsx'
  * Displays brain regions that pulse with color animations and can be toggled
  * between "cool" and "warm" states through user interaction.
  */
-const BrainMap = React.memo(({ selectedRegions }) => {
+const BrainMap = React.memo(({ selectedRegions, enhanceRegion }) => {
     // State for animation timing
     const [animationTime, setAnimationTime] = useState(0);
 
@@ -47,13 +47,13 @@ const BrainMap = React.memo(({ selectedRegions }) => {
         };
     }, []);
 
-    // Toggle selected state for clicked regions
-    const handleRegionClick = useCallback((regionId) => {
-        setSelectedRegions((prev) => ({
-            ...prev,
-            [regionId]: !prev[regionId],
-        }));
-    }, []);
+    // Updated enhancedRegion to clicked region
+    const handleRegionClick = useCallback((region) => {
+        if (typeof enhanceRegion === 'function') {
+            enhanceRegion(region);
+        }
+    }, [enhanceRegion]);
+
 
     // Create and manage tooltips for brain regions
     const handleMouseEnter = useCallback((e, region) => {
@@ -130,7 +130,7 @@ const BrainMap = React.memo(({ selectedRegions }) => {
                         <g
                             key={region.id}
                             className={`region-wrapper ${isWarm ? 'warm' : 'cool'}`}
-                            onClick={() => handleRegionClick(region.id)}
+                            onClick={() => handleRegionClick(region)}
                             role="button"
                             aria-pressed={isWarm}
                             aria-label={`Brain region: ${region.name || region.id}`}
