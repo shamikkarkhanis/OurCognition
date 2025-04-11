@@ -1,10 +1,19 @@
-// MicroSimPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Add useEffect import
 import MicroSim from '../components/common/MicroSim.jsx';
 import MicroSynapse from '../components/common/MicroSynapse.jsx';
 
 export default function MicroSimPage() {
   const [currentStage, setCurrentStage] = useState(0);
+
+  // This useEffect is correctly imported now
+  useEffect(() => {
+    // Reset animation when stage changes
+    const timer = setTimeout(() => {
+      setCurrentStage(prev => prev);
+    }, 50);
+    
+    return () => clearTimeout(timer);
+  }, [currentStage]);
 
   return (
     <div style={styles.container}>
