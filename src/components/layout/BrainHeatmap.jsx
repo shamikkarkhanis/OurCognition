@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { hslToRgb } from '../utils/colorUtils';
 import '../../styles/BrainHeatmap.css';
 import brainRegionsBase from '../common/BrainRegionsBase.jsx'
+import alzheimersRegionData from "../common/AlzheimersRegionsData";
 
 /**
  * BrainMap - Interactive brain region visualization component
@@ -57,23 +58,35 @@ const BrainMap = React.memo(({ selectedRegions, enhanceRegion }) => {
 
     // Create and manage tooltips for brain regions
     const handleMouseEnter = useCallback((e, region) => {
-        // Create tooltip element
-        const tooltip = document.createElement('div');
-        tooltip.style.position = 'absolute';
-        tooltip.style.left = `${e.clientX + 10}px`;
-        tooltip.style.top = `${e.clientY + 10}px`;
-        tooltip.style.padding = '5px';
-        tooltip.style.background = '#333';
-        tooltip.style.color = 'white';
-        tooltip.style.borderRadius = '3px';
-        tooltip.style.fontSize = '12px';
-        tooltip.style.pointerEvents = 'none';
-        tooltip.textContent = region.name || region.id;
-        document.body.appendChild(tooltip);
+        const regionData = alzheimersRegionData[region.id];
 
-        // Store tooltip reference
+        const tooltip = document.createElement('div');
+        tooltip.className = 'brain-tooltip';
+
+        const name = regionData?.name || region.name || region.id;
+        const functions = regionData?.functions || [];
+
+        // Render functions as list items
+        const functionList = functions.map(fn => `<li class="tooltip-function-item">${fn}</li>`).join('');
+
+        tooltip.innerHTML = `
+          <div class="tooltip-title">${name}</div>
+          <ul class="tooltip-function-list">
+            ${functionList}
+          </ul>
+        `;
+
+        tooltip.style.position = 'absolute';
+        tooltip.style.left = `${e.clientX + 12}px`;
+        tooltip.style.top = `${e.clientY + 12}px`;
+        tooltip.style.zIndex = '9999';
+        tooltip.style.pointerEvents = 'none';
+
+        document.body.appendChild(tooltip);
         e.target.tooltip = tooltip;
     }, []);
+
+
 
     // Remove tooltip on mouse leave
     const handleMouseLeave = useCallback((e) => {
