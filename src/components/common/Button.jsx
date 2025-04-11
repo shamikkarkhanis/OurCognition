@@ -11,7 +11,7 @@ export const Button = ({
   onClick,
   buttonStyle,
   buttonSize,
-  to // <-- Added "to" prop for custom navigation
+  to 
 }) => {
   const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0];
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
