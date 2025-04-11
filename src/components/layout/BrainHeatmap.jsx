@@ -49,7 +49,7 @@ const BrainMap = React.memo(({ selectedRegions, enhanceRegion }) => {
 
     // Updated enhancedRegion to clicked region
     const handleRegionClick = useCallback((region) => {
-        if (typeof enhanceRegion === 'function') {
+        if (typeof enhanceRegion === 'function' && region.id in selectedRegions) {
             enhanceRegion(region);
         }
     }, [enhanceRegion]);
