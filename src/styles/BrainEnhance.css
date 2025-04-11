@@ -1,12 +1,37 @@
-.brain-enhance {
-    background-color: #f0f8ff;
-    color: #333;
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-    border-radius: 10px;
+.source-bubbles {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+
 }
 
-.brain-enhance h2 {
-    font-size: 2em;
-    margin-bottom: 15px;
+.source-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #7c3aed;
+    /* violet */
+    display: inline-block;
+    transition: transform 0.2s ease;
+    animation: undulate 2s ease-in-out infinite;
+}
+
+@keyframes undulate {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+.source-dot:hover {
+    background-color: #a78bfa;
+
 }

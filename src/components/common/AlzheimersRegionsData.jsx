@@ -3,22 +3,28 @@ const alzheimersRegionData = {
         name: "Frontal Lobe",
         functions: [
             "Executive functions (planning, decision making, reasoning)",
-            "Motor control",
-            "Personality and emotional regulation"
+            "Motor control and goal-directed behavior",
+            "Personality, emotional regulation, and impulse control"
         ],
         alzheimersImpact: {
-            structuralChanges: "Progressive atrophy, particularly in the dorsolateral prefrontal cortex and orbitofrontal cortex.",
+            structuralChanges: "Notable atrophy observed particularly in the dorsolateral prefrontal cortex and orbitofrontal cortex, reducing cortical thickness and white matter connectivity.",
             biochemicalChanges: [
-                "Reduced cholinergic transmission",
-                "Impaired dopamine signaling in prefrontal circuits"
+                "Significant reduction in cholinergic and dopaminergic neurotransmission",
+                "Increased tau pathology disrupting executive control circuits",
+                "Synaptic loss impairs cortical integration and inhibitory control"
             ],
             clinicalSymptoms: [
-                "Impaired judgment and decision-making",
-                "Personality changes",
-                "Loss of initiative and apathy"
+                "Impaired planning and reasoning",
+                "Personality changes including disinhibition or apathy",
+                "Reduced motivation, initiative, and goal-oriented behavior"
             ]
-        }
+        },
+        sources: [
+            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6869805/",
+            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2443731/"
+        ]
     },
+
     "parietal-lobe": {
         name: "Parietal Lobe",
         functions: [
@@ -27,76 +33,100 @@ const alzheimersRegionData = {
             "Mathematical and numerical cognition"
         ],
         alzheimersImpact: {
-            structuralChanges: "Cortical thinning and disrupted white matter tracts affecting visuospatial processing.",
+            structuralChanges: "Marked cortical thinning, especially in the inferior parietal lobule and precuneus, contributing to impaired spatial processing.",
             biochemicalChanges: [
-                "Dysregulation of glutamatergic pathways",
-                "Functional disconnect from hippocampus"
+                "Functional disconnection from hippocampal-cortical networks",
+                "Decreased glucose metabolism evident in FDG-PET studies",
+                "Glutamatergic signaling disruption affecting visuospatial integration"
             ],
             clinicalSymptoms: [
-                "Getting lost easily",
-                "Difficulty recognizing familiar objects or faces",
-                "Disorientation in time and space"
+                "Difficulty navigating familiar environments",
+                "Impaired visuospatial awareness and depth perception",
+                "Problems with calculations and object manipulation"
             ]
-        }
+        },
+        sources: [
+            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2734142/",
+            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5956809/"
+        ]
     },
+
     "temporal-lobe": {
         name: "Temporal Lobe",
         functions: [
-            "Auditory processing",
-            "Memory formation",
-            "Language comprehension (left hemisphere)"
+            "Auditory and language comprehension (Wernicke’s area)",
+            "Declarative and episodic memory formation",
+            "Emotional processing (via amygdala and hippocampus)"
         ],
         alzheimersImpact: {
-            structuralChanges: "Atrophy of the medial temporal structures including the hippocampus and entorhinal cortex.",
+            structuralChanges: "Early and severe atrophy of medial temporal structures such as the hippocampus and entorhinal cortex, along with lateral temporal degeneration in later stages.",
             biochemicalChanges: [
-                "Early tau pathology and amyloid deposition",
-                "Decreased synaptic density in auditory and language areas"
+                "Dense amyloid-beta and hyperphosphorylated tau accumulation",
+                "Loss of synapses and neuronal networks crucial for language and memory",
+                "Reduced acetylcholine levels in memory-related circuits"
             ],
             clinicalSymptoms: [
-                "Memory loss (especially episodic)",
-                "Difficulty understanding spoken language",
-                "Impaired auditory discrimination"
+                "Profound short-term memory impairment",
+                "Difficulty understanding spoken language and naming objects",
+                "Disrupted recall of autobiographical events"
             ]
-        }
+        },
+        sources: [
+            "https://pubmed.ncbi.nlm.nih.gov/1759558/",
+            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3267543/"
+        ]
     },
+
     "occipital-lobe": {
         name: "Occipital Lobe",
         functions: [
-            "Visual processing and interpretation",
-            "Recognition of shapes, colors, and motion"
+            "Primary and associative visual processing",
+            "Interpretation of motion, shape, and spatial orientation",
+            "Recognition of faces and complex scenes"
         ],
         alzheimersImpact: {
-            structuralChanges: "Less affected in early stages but may show atrophy in visual association areas later.",
+            structuralChanges: "Atrophy observed in visual association areas, especially in the lingual gyrus and cuneus, with more severe damage in posterior cortical atrophy (PCA).",
             biochemicalChanges: [
-                "Disruption of posterior cortical networks",
-                "Secondary involvement from parietal and temporal degeneration"
+                "Disruption of dorsal and ventral visual pathways",
+                "Amyloid-beta deposition in the calcarine and extrastriate cortex",
+                "Reduced metabolic activity in the occipital pole"
             ],
             clinicalSymptoms: [
-                "Visual misperceptions",
-                "Difficulty interpreting complex visual scenes",
-                "Reduced visual memory"
+                "Visual misperceptions or illusions (e.g. simultanagnosia)",
+                "Difficulty recognizing faces, objects, or text (visual agnosia)",
+                "Occasional visual hallucinations in late stages"
             ]
-        }
+        },
+        sources: [
+            "https://pubmed.ncbi.nlm.nih.gov/21348892/",
+            "https://www.nature.com/articles/nrneurol.2012.13"
+        ]
     },
+
     "brainstem": {
         name: "Brainstem",
         functions: [
-            "Autonomic functions (breathing, heart rate)",
-            "Sleep regulation",
-            "Relay center for sensory and motor pathways"
+            "Autonomic control (respiration, cardiac regulation, digestion)",
+            "Sleep-wake cycle and arousal (via reticular activating system)",
+            "Neurochemical relay hub for dopamine, serotonin, norepinephrine"
         ],
         alzheimersImpact: {
-            structuralChanges: "Neuronal loss in the locus coeruleus and dorsal raphe nuclei.",
+            structuralChanges: "Early neurodegeneration of the locus coeruleus (noradrenaline) and dorsal raphe nucleus (serotonin), even before cortical symptoms emerge.",
             biochemicalChanges: [
-                "Early degeneration of noradrenergic and serotonergic systems",
-                "Reduced arousal and alertness modulation"
+                "Degeneration of monoaminergic neurons leads to dysregulation of mood and circadian rhythms",
+                "Noradrenergic depletion disrupts attention and cognitive vigilance",
+                "Serotonergic loss contributes to depression and sleep fragmentation"
             ],
             clinicalSymptoms: [
-                "Sleep disturbances",
-                "Reduced attention and alertness",
-                "Autonomic dysfunction in late stages"
+                "REM sleep disturbances and daytime drowsiness",
+                "Heightened anxiety or mood instability",
+                "Autonomic dysfunctions such as irregular heart rate and poor thermoregulation"
             ]
-        }
+        },
+        sources: [
+            "https://pubmed.ncbi.nlm.nih.gov/28326995/",
+            "https://pubmed.ncbi.nlm.nih.gov/23620517/"
+        ]
     }
 };
 

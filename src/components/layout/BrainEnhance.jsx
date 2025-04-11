@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/Timeline.css';
+import '../../styles/BrainEnhance.css';
 
 import AlzheimersRegionsData from '../common/AlzheimersRegionsData.jsx';
 
@@ -7,40 +8,73 @@ import AlzheimersRegionsData from '../common/AlzheimersRegionsData.jsx';
 
 const BrainEnhance = React.memo(({ enhancedRegion, setEnhancedRegion }) => {
 
-    if (!enhancedRegion) {
-        return
-    }
-
     const data = AlzheimersRegionsData[enhancedRegion.id];
 
-    if (!data) {
-        return <div className="timeline-content">No data available for this region.</div>;
+    if ((!enhancedRegion) || (!data)) {
+        return
     }
 
     const handleBack = () => {
         setEnhancedRegion(null);
     };
 
-
     return (
-        <div className='timeline-content'>
-            <div>
-                <h2>{data.name}</h2>
-                <h4>Functions:</h4>
-                <ul>{data.functions.map((fn, i) => <li key={i}>{fn}</li>)}</ul>
+        <div className="timeline-container">
+            <div className="timeline-header">
+                <h2 className="timeline-title">{data.name}</h2>
+            </div>
 
-                <h4>Alzheimer's Impact</h4>
-                <p><strong>Structural Changes:</strong> {data.alzheimersImpact.structuralChanges}</p>
-                <p><strong>Biochemical Changes:</strong></p>
-                <ul>{data.alzheimersImpact.biochemicalChanges.map((c, i) => <li key={i}>{c}</li>)}</ul>
-                <p><strong>Clinical Symptoms:</strong></p>
-                <ul>{data.alzheimersImpact.clinicalSymptoms.map((s, i) => <li key={i}>{s}</li>)}</ul>
+            <div className="timeline-content">
+                <div className="timeline-details">
+                    <strong>Functions:</strong>
+                    <ul className="event-list">
+                        {data.functions.map((fn, i) => (
+                            <li key={i} className="event-item">{fn}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="timeline-details">
+                    <strong>Alzheimer's Impact</strong>
+                    <p className="timeline-description">
+                        <strong>Structural Changes: </strong>
+                        {data.alzheimersImpact.structuralChanges}
+                    </p>
+
+                    <strong>Biochemical Changes:</strong>
+                    <ul className="event-list">
+                        {data.alzheimersImpact.biochemicalChanges.map((change, i) => (
+                            <li key={i} className="event-item">{change}</li>
+                        ))}
+                    </ul>
+
+                    <strong>Clinical Symptoms:</strong>
+                    <ul className="event-list">
+                        {data.alzheimersImpact.clinicalSymptoms.map((symptom, i) => (
+                            <li key={i} className="event-item">{symptom}</li>
+                        ))}
+                    </ul>
+                </div>
             </div>
 
             <div className="timeline-buttons">
                 <button onClick={handleBack} className="back-button">
                     ← Back
                 </button>
+
+                {/* Source bubbles */}
+                <div className="source-bubbles">
+                    {data.sources?.map((src, index) => (
+                        <a
+                            key={index}
+                            href={src}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="source-dot"
+                            title={`Source ${index + 1}`}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );
