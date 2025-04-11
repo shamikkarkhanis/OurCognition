@@ -30,6 +30,9 @@ function Content() {
     // Store region to show enhanced description
     const [enhancedRegion, setEnhancedRegion] = useState(null);
 
+    // Store last visited index
+    const [lastVisitedIndex, setLastVisitedIndex] = useState(0);
+
     // Handle region selection
     const handleRegionSelect = (region) => {
         setActiveRegion(region);
@@ -62,6 +65,8 @@ function Content() {
                         <Timeline
                             setActiveRegions={setActiveRegions}
                             activeRegion={activeRegion}
+                            lastVisitedIndex={lastVisitedIndex}
+                            setLastVisitedIndex={setLastVisitedIndex}
                         />
                     )}
                 </div>

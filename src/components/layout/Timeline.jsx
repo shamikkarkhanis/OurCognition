@@ -8,59 +8,51 @@ import { createStaticRouter } from 'react-router-dom';
  * Displays a sequence of Alzheimer's disease progression stages.
  * Each stage highlights associated brain regions and descriptive details.
  */
-const Timeline = ({ selection, setActiveRegions }) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisitedIndex }) => {
+    const [currentIndex, setCurrentIndex] = useState(lastVisitedIndex);
 
-    // Only supporting Alzheimer's for now
-    const events = "alzheimers" ? alzheimersEvents : [];
+    const events = alzheimersEvents;
 
-    // Updates the active brain regions for the current event
-    const updateActiveRegions = (regions) => {
-        if (!regions || regions.length === 0) {
-            return;
-        }
-        setActiveRegions({});
-        regions.forEach((region, index) => {
-            setActiveRegions((prev) => ({ ...prev, [region]: index + 1 }));
-        });
-    };
-
-    // Automatically update regions on slide change
     useEffect(() => {
         if (events.length > 0) {
             updateActiveRegions(events[currentIndex].brain_region);
         }
     }, [currentIndex]);
 
-    // Navigate to the next stage
+    const updateActiveRegions = (regions) => {
+        setActiveRegions({});
+        regions.forEach((region, index) => {
+            setActiveRegions((prev) => ({ ...prev, [region]: index + 1 }));
+        });
+    };
+
     const handleNext = () => {
         if (events.length === 0) {
             return;
         }
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % events.length);
+        const nextIndex = (currentIndex + 1) % events.length;
+        setCurrentIndex(nextIndex);
+        setLastVisitedIndex(nextIndex);
     };
 
-    // Navigate to the previous stage
     const handleBack = () => {
         if (events.length === 0) {
             return;
         }
-        if (!(currentIndex === 0)) {
-            setCurrentIndex((prevIndex) => (prevIndex - 1 + events.length) % events.length);
-            return true
+        if (currentIndex !== 0) {
+            const prevIndex = (currentIndex - 1 + events.length) % events.length;
+            setCurrentIndex(prevIndex);
+            setLastVisitedIndex(prevIndex);
+            return true;
         }
-        return false
+        return false;
     };
 
-    // Reset timeline to the beginning
     const handleReset = () => {
         setCurrentIndex(0);
+        setLastVisitedIndex(0);
         setActiveRegions({});
     };
-
-    if (events.length === 0) {
-        return <div className="timeline-container">No events available for this selection.</div>;
-    }
 
     const currentEvent = events[currentIndex];
 

@@ -8,7 +8,7 @@ import AlzheimersRegionsData from '../common/AlzheimersRegionsData.jsx';
 const BrainEnhance = React.memo(({ enhancedRegion, setEnhancedRegion }) => {
 
     if (!enhancedRegion) {
-        return <div className="timeline-content">Click on a region to see details.</div>;
+        return
     }
 
     const data = AlzheimersRegionsData[enhancedRegion.id];
@@ -23,7 +23,7 @@ const BrainEnhance = React.memo(({ enhancedRegion, setEnhancedRegion }) => {
 
 
     return (
-        <div className={'timeline-content'}>
+        <div className='timeline-content'>
             <div>
                 <h2>{data.name}</h2>
                 <h4>Functions:</h4>

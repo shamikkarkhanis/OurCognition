@@ -8,9 +8,10 @@
 
 /* Flex container */
 .content-body {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
-    height: calc(50vh - 80px);
+    align-items: stretch;
 }
 
 /* Shared panel styles */
@@ -27,4 +28,16 @@
     /* Ensure it fills parent flex height */
     box-sizing: border-box;
     /* Makes padding consistent */
+}
+
+/* Responsive stack for smaller screens */
+@media (max-width: 768px) {
+    .content-body {
+        grid-template-columns: 1fr;
+    }
+
+    .sim-container,
+    .description-container {
+        width: 100%;
+    }
 }
