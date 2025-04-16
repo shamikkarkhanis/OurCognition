@@ -9,10 +9,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import ContentNavbar from '../components/layout/ContentNavbar';
 import BrainMap from '../components/layout/BrainHeatmap';
 import Timeline from '../components/layout/Timeline';
 import '../styles/Content.css';
+import BrainEnhance from '../components/layout/BrainEnhance';
 
 /**
  * Content component renders the main visualization area including brain heatmap and timeline
@@ -20,8 +20,6 @@ import '../styles/Content.css';
  * @returns {JSX.Element} Rendered component
  */
 function Content() {
-    // Track currently selected condition (default: alzheimers)
-    const [selection, setSelection] = useState('alzheimers');
 
     // Track active brain region for highlighting
     const [activeRegion, setActiveRegion] = useState(null);
@@ -29,40 +27,52 @@ function Content() {
     // Store multiple active regions with their activation values
     const [activeRegions, setActiveRegions] = useState({});
 
+    // Store region to show enhanced description
+    const [enhancedRegion, setEnhancedRegion] = useState(null);
+
+    // Store last visited index
+    const [lastVisitedIndex, setLastVisitedIndex] = useState(0);
+
     // Handle region selection
     const handleRegionSelect = (region) => {
         setActiveRegion(region);
     };
 
+    // Handle region click to enhance description
+    const handleEnhanceRegion = (region) => {
+        setEnhancedRegion(region);
+    }
+
     return (
         <div className="content-root">
-            <ContentNavbar
-                setSelection={setSelection}
-                currentSelection={selection}
-            />
             <div className="content-body">
                 <div className="sim-container">
                     <BrainMap
                         selectedRegions={activeRegions}
                         onRegionSelect={handleRegionSelect}
                         activeRegion={activeRegion}
+                        enhanceRegion={handleEnhanceRegion}
                     />
                 </div>
-                <div className="timeline-container">
-                    <Timeline
-                        selection={selection}
-                        setActiveRegions={setActiveRegions}
-                        activeRegion={activeRegion}
-                    />
+                <div className="description-container">
+
+                    {enhancedRegion ? (
+                        <BrainEnhance
+                            enhancedRegion={enhancedRegion}
+                            setEnhancedRegion={setEnhancedRegion}
+                        />
+                    ) : (
+                        <Timeline
+                            setActiveRegions={setActiveRegions}
+                            activeRegion={activeRegion}
+                            lastVisitedIndex={lastVisitedIndex}
+                            setLastVisitedIndex={setLastVisitedIndex}
+                        />
+                    )}
                 </div>
             </div>
         </div>
     );
 }
-
-// PropType validation for the component
-Content.propTypes = {
-    // Add any props if this component receives them later
-};
 
 export default Content;

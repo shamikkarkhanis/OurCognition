@@ -1,12 +1,8 @@
+/*! NEED TO GENERALIZE THIS */
+
 /* Overall container styling */
 .timeline-container {
     flex: 1;
-    /* match sim container */
-    background-color: #1c1c1e;
-    border-radius: 16px;
-    padding: 24px;
-    color: #e0e0e0;
-    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -38,6 +34,8 @@
 .timeline-content {
     margin-bottom: 24px;
     text-align: left;
+    position: relative;
+    z-index: 1;
 }
 
 .timeline-title {
@@ -91,6 +89,7 @@
 .timeline-buttons {
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
 }
 
 .timeline-buttons button {
@@ -108,4 +107,11 @@
 .timeline-buttons button:hover {
     background-color: #3a45c2;
     transform: scale(1.03);
+}
+
+.description-container {
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    min-height: 100px;
 }
