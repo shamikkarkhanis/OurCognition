@@ -7,12 +7,13 @@ import Home from './pages/Home';
 import Content from './pages/Content';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import BrainMap from "./components/layout/BrainHeatmap";
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <div className="content-wrapper"> 
+      <div className="content-wrapper">
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/content' element={<Content />} />
@@ -20,7 +21,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
         </Routes>
       </div>
-      <Footer /> 
+      <Footer />
     </Router>
   );
 }
