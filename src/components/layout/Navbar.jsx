@@ -14,7 +14,6 @@ function Navbar() {
         <div className='navbar-container'>
           {/* Logo stays on the left */}
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            <img src='src/assets/logo_form_pink.png' alt='OurCognition Logo' className="logo" /> {/* This should use src/assets images */}
           </Link>
 
           {/* Hamburger menu icon for mobile */}

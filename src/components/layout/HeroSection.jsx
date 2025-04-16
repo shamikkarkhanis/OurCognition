@@ -6,11 +6,7 @@ import '../../styles/HeroSection.css';
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <img
-        src='src/assets/logo_type.png'
-        alt='OurCognition Logo'
-        className='hero-logo'
-      />
+      <div className="hero-logo"></div>
       <p>Exploring the complexities of Alzheimer's disease and cognitive health</p>
       <div className='hero-btns'>
         <Button
