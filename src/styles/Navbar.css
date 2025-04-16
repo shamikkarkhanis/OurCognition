@@ -1,178 +1,217 @@
+/* Navbar.css */
+:root {
+  --primary-color: #3a86ff;
+  --text-color: #333;
+  --light-text: #fff;
+  --dark-bg: #111;
+  --transition-speed: 0.3s;
+  --navbar-height: 64px;
+}
+
 .navbar {
-  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-  height: 70px;
-  /* Adjusted navbar height */
-  display: flex;
-  justify-content: space-between;
-  /* Spacing between logo and menu */
-  align-items: center;
-  font-size: 1.1rem;
+  height: var(--navbar-height);
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 1000;
+  transition: all var(--transition-speed) ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-container {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
   display: flex;
   justify-content: center;
-  /* Centering the menu */
+  /* Center the nav menu */
   align-items: center;
-  width: 100%;
-  padding: 0 20px;
   position: relative;
 }
 
-.navbar-logo {
-  background: url('../assets/logo_form_pink.png') no-repeat;
-  background-size: contain;
-  width: 170px;
-  height: 70px;
-  position: absolute;
-  left: 20px;
-  /* Keeps logo on the left */
-  justify-self: start;
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  text-decoration: none;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
+  padding: 0;
+  width: 28px;
+  height: 22px;
+  position: absolute;
+  left: 1.5rem;
+  z-index: 1001;
 }
 
-.logo {
-  color: #f3b5b8;
-  height: 3em;
-  /* Adjusted logo size */
-  padding: 0.8em;
+.menu-toggle .bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-color);
+  margin: 5px 0;
+  transition: var(--transition-speed);
 }
 
-.fa-typo3 {
-  margin-left: 0.5rem;
-  font-size: 1.8rem;
+.menu-toggle.active .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .nav-menu {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-gap: 10px;
+  display: flex;
   list-style: none;
-  text-align: center;
-  width: 50vw;
-  /* Adjusted width */
-  justify-content: center;
-  /* Centered the nav items */
-  margin-right: 0;
-  /* Removed extra margin */
-  margin: 0 auto;
-  /* Ensures proper centering */
+  margin: 0;
   padding: 0;
-  width: fit-content;
+  justify-content: center;
+  /* Center items */
 }
 
 .nav-item {
-  height: 70px;
-  /* Adjusted to match navbar height */
+  margin: 0 0.8rem;
 }
 
-.nav-links {
-  color: #fff;
-  display: flex;
-  align-items: center;
+.nav-link {
+  color: var(--text-color);
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  height: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.8rem 0.5rem;
+  display: block;
+  position: relative;
+  transition: color var(--transition-speed) ease;
 }
 
-.nav-links:hover {
-  border-bottom: 4px solid #fff;
-  transition: all 0.2s ease-out;
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width var(--transition-speed) ease;
 }
 
-.fa-bars {
-  color: #fff;
+.nav-link:hover {
+  color: var(--primary-color);
 }
 
-.nav-links-mobile {
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-overlay {
   display: none;
 }
 
-.menu-icon {
-  display: none;
-}
+/* Mobile styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
 
-@media screen and (max-width: 960px) {
-  .NavbarItems {
-    position: relative;
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-speed);
+    z-index: 999;
+  }
+
+  .nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
   }
 
   .nav-menu {
-    display: flex;
-    flex-direction: column;
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
     width: 100%;
-    height: 90vh;
-    position: absolute;
-    top: 70px;
-    left: -100%;
-    opacity: 1;
-    transition: all 0.5s ease;
+    background-color: #fff;
+    flex-direction: column;
+    align-items: center;
+    /* Center items in mobile */
+    padding: 1rem 0;
+    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
   }
 
   .nav-menu.active {
-    background: #242222;
-    left: 0;
     opacity: 1;
-    z-index: 1;
+    visibility: visible;
   }
 
-  .nav-links {
-    text-align: center;
-    padding: 1.5rem;
-    /* Reduced padding for a more compact layout */
+  .nav-item {
+    margin: 0.5rem 0;
     width: 100%;
-    display: table;
-  }
-
-  .nav-links-mobile {
-    display: block;
     text-align: center;
-    margin: 1.5rem auto;
-    border-radius: 4px;
-    width: 80%;
-    text-decoration: none;
-    font-size: 1.4rem;
-    /* Slightly smaller font size */
-    background-color: transparent;
-    color: #fff;
-    padding: 12px 18px;
-    /* Adjusted padding */
-    border: 1px solid #fff;
-    transition: all 0.3s ease-out;
   }
 
-  .nav-links-mobile:hover {
-    background: #fff;
-    color: #242424;
-    transition: 250ms;
+  .nav-link {
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
   }
 
-  .navbar-logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(25%, 50%);
+  .navbar.scrolled {
+    background-color: #fff;
   }
 
-  .menu-icon {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 60%);
-    font-size: 1.8rem;
-    cursor: pointer;
+  /* Dark mode for mobile menu */
+  .menu-toggle.active .bar {
+    background-color: var(--text-color);
+  }
+}
+
+/* Optional Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #eee;
+    --light-text: #eee;
+    --dark-bg: #121212;
   }
 
-  .fa-times {
-    color: #fff;
-    font-size: 2rem;
+  .navbar {
+    background-color: var(--dark-bg);
+  }
+
+  .navbar.scrolled {
+    background-color: rgba(18, 18, 18, 0.95);
+  }
+
+  .menu-toggle .bar {
+    background-color: var(--light-text);
+  }
+
+  .nav-menu {
+    background-color: var(--dark-bg);
+  }
+
+  .nav-link {
+    color: var(--light-text);
+  }
+
+  .nav-link:hover {
+    color: var(--primary-color);
   }
 }
