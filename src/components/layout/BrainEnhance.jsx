@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../styles/Timeline.css';
-import '../../styles/BrainEnhance.css';
 
 import AlzheimersRegionsData from '../common/AlzheimersRegionsData.jsx';
 

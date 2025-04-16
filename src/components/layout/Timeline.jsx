@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/Timeline.css';
 import alzheimersEvents from '../common/AlzheimersEvents.jsx';
-import { createStaticRouter } from 'react-router-dom';
 
 /**
  * Timeline Component
@@ -76,12 +75,35 @@ const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisite
                 </div>
 
                 <div className="timeline-details">
-                    <strong>Details:</strong>
+                    <strong>What Happens:</strong>
                     <ul className="event-list">
-                        {currentEvent.details.map((detail, index) => (
-                            <li key={index} className="event-item">{detail}</li>
+                        {currentEvent.what_happens.map((item, index) => (
+                            <li key={index} className="event-item">{item}</li>
                         ))}
                     </ul>
+                </div>
+
+                <div className="timeline-details">
+                    <strong>Why It Matters:</strong>
+                    <ul className="event-list">
+                        {currentEvent.why_it_matters.map((item, index) => (
+                            <li key={index} className="event-item">{item}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Source bubbles */}
+                <div className="source-bubbles">
+                    {currentEvent.sources?.map((src, index) => (
+                        <a
+                            key={index}
+                            href={src}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="source-dot"
+                            title={`Source ${index + 1}`}
+                        />
+                    ))}
                 </div>
             </div>
 
