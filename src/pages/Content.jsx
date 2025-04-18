@@ -1,96 +1,71 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import ContentNavbar from '../components/layout/ContentNavbar.jsx';
-import BrainHeatmap from '../components/common/BrainHeatmap.jsx';
-import Timeline from '../components/layout/Timeline.jsx';
-import MicroTimeline from '../components/common/MicroTimeline.jsx';
-import { Button } from "../components/common/Button.jsx"; 
+import BrainMap from '../components/layout/BrainHeatmap';
+import Timeline from '../components/layout/Timeline';
+import BrainEnhance from '../components/layout/BrainEnhance';
+import { Button } from "../components/common/Button.jsx";
+import { useNavigate } from 'react-router-dom';
+import '../styles/Content.css';
 
 function Content() {
-    const [selection, setSelection] = useState('alzheimers');
-    const [showMicro, setShowMicro] = useState(false); // Toggle between Macro and Micro Timeline
-    const [activeRegion, setActiveRegion] = useState(null);
-    const [activeRegions, setActiveRegions] = useState({});
-    const undulationIntervalId = useRef(null);
+  const [selection, setSelection] = useState('alzheimers');
+  const [activeRegion, setActiveRegion] = useState(null);
+  const [activeRegions, setActiveRegions] = useState({});
+  const [enhancedRegion, setEnhancedRegion] = useState(null);
+  const [lastVisitedIndex, setLastVisitedIndex] = useState(0);
 
-    // Function to start undulating color shades
-    const undulateRegion = (regionId) => {
-        if (activeRegion) {
-            setActiveRegions((prev) => ({ ...prev, [activeRegion]: 0 }));
-            if (undulationIntervalId.current) {
-                clearInterval(undulationIntervalId.current);
-            }
-        }
+  const navigate = useNavigate();
 
-        setActiveRegion(regionId);
+  const handleRegionSelect = (region) => {
+    setActiveRegion(region);
+  };
 
-        const intervalTime = 100; // Time between each shade change (ms)
-        const newIntervalId = setInterval(() => {
-            setActiveRegions((prev) => {
-                const currentActivity = (prev[regionId] || 0) + 7;
-                return { ...prev, [regionId]: currentActivity % 100 };
-            });
-        }, intervalTime);
+  const handleEnhanceRegion = (region) => {
+    setEnhancedRegion(region);
+  };
 
-        undulationIntervalId.current = newIntervalId;
-    };
+  const goToMicroSim = () => {
+    navigate('/sim');
+  };
 
-    return (
-        <div style={styles.container}>
-            <ContentNavbar setSelection={setSelection} />
-            <div style={styles.content}>
-                <div style={styles.heatmapContainer}>
-                    <BrainHeatmap
-                        selection={selection}
-                        undulateRegion={undulateRegion}
-                        activeRegions={activeRegions} />
-                </div>
-                <div style={styles.timelineContainer}>
-                    {/* Toggle Button */}
-                    <Button onClick={() => setShowMicro(!showMicro)} style={styles.toggleButton}>
-                        {showMicro ? 'Show Macro Timeline' : 'Show Micro Timeline'}
-                    </Button>
-                    
-                    {/* Conditional Rendering of Timelines */}
-                    {showMicro ? (
-                        <MicroTimeline triggerUndulation={undulateRegion} />
-                    ) : (
-                        <Timeline selection={selection} triggerUndulation={undulateRegion} />
-                    )}
-                </div>
-            </div>
+  return (
+    <div className="content-root">
+      <ContentNavbar setSelection={setSelection} />
+      <div className="content-body">
+        <div className="sim-container">
+          <BrainMap
+            selectedRegions={activeRegions}
+            onRegionSelect={handleRegionSelect}
+            activeRegion={activeRegion}
+            enhanceRegion={handleEnhanceRegion}
+          />
         </div>
-    );
-}
 
-const styles = {
-    container: {
-        padding: '20px',
-        minHeight: '100vh',
-        backgroundColor: '#0f0f0f',
-        color: 'white',
-    },
-    content: {
-        display: 'flex',
-        gap: '20px',
-        marginTop: '20px',
-    },
-    heatmapContainer: {
-        flex: '1',
-        backgroundColor: '#1c1c1e',
-        borderRadius: '10px',
-        padding: '20px',
-    },
-    timelineContainer: {
-        flex: '1',
-        backgroundColor: '#1c1c1e',
-        borderRadius: '10px',
-        padding: '20px',
-        position: 'relative',
-    },
-    toggleButton: {
-        marginBottom: '10px',
-        width: '100%',
-    },
-};
+        <div className="description-container">
+          {/* Redirect to MicroSimPage */}
+          <Button onClick={goToMicroSim} style={{ marginBottom: '10px', width: '100%' }}>
+            View Micro Timeline & Synapse Simulation →
+          </Button>
+
+          {/* Enhanced region OR timeline view */}
+          {enhancedRegion ? (
+            <BrainEnhance
+              enhancedRegion={enhancedRegion}
+              setEnhancedRegion={setEnhancedRegion}
+            />
+          ) : (
+            <Timeline
+              selection={selection}
+              setActiveRegions={setActiveRegions}
+              activeRegion={activeRegion}
+              lastVisitedIndex={lastVisitedIndex}
+              setLastVisitedIndex={setLastVisitedIndex}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default Content;

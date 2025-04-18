@@ -8,21 +8,23 @@ import Content from './pages/Content';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import MicroSimPage from './pages/MicroSimPage';
+import BrainMap from './components/layout/BrainHeatmap';
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <div className="content-wrapper"> 
+      <div className="content-wrapper">
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/content' element={<Content />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/sim' element={<MicroSimPage />} />
+          <Route path='/brain' element={<BrainMap />} />
         </Routes>
       </div>
-      <Footer /> 
+      <Footer />
     </Router>
   );
 }
