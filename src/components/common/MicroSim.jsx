@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import '../../styles/Timeline.css'; // Reusing your existing shared CSS
 
 const stages = [
   {
@@ -58,65 +58,45 @@ const MicroSim = ({ currentStage, setCurrentStage }) => {
   const stage = stages[currentStage];
 
   return (
-    <div style={styles.container}>
-      <motion.div
-        key={currentStage}
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        style={styles.card}
-      >
-        <h2>{stage.title}</h2>
-        <p><em>{stage.time}</em></p>
-        <p><strong>{stage.keyEvent}</strong></p>
-        <ul>
-          {stage.details.map((point, idx) => (
-            <li key={idx}>{point}</li>
-          ))}
-        </ul>
-        <div style={styles.controls}>
+    <div className="timeline-container">
+      <div className="timeline-header">
+        <h2 className="timeline-title">{stage.title}</h2>
+        <div className="stage-progress">{currentStage + 1}/{stages.length}</div>
+      </div>
+
+      <div className="timeline-content">
+        <p className="timeline-description">{stage.time}</p>
+        <p className="timeline-region"><strong>Key Event:</strong> {stage.keyEvent}</p>
+
+        <div className="timeline-details">
+          <strong>Details:</strong>
+          <ul className="event-list">
+            {stage.details.map((point, idx) => (
+              <li key={idx} className="event-item">{point}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className="timeline-buttons">
         <button
           onClick={() => setCurrentStage(currentStage - 1)}
           disabled={currentStage === 0}
-          style={styles.button}
         >
-        Back
+          ← Back
         </button>
-          <button
-            onClick={() => setCurrentStage(currentStage + 1)}
-            disabled={currentStage === stages.length - 1}
-          >
-            Next
-          </button>
-        </div>
-      </motion.div>
+        <button onClick={() => setCurrentStage(0)}>
+          Reset
+        </button>
+        <button
+          onClick={() => setCurrentStage(currentStage + 1)}
+          disabled={currentStage === stages.length - 1}
+        >
+          Next →
+        </button>
+      </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    backgroundColor: '#0f0f0f',
-    color: 'white',
-    minHeight: '100vh',
-    padding: '2rem',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  card: {
-    backgroundColor: '#1c1c1e',
-    borderRadius: '12px',
-    padding: '2rem',
-    maxWidth: '700px',
-    width: '100%',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
-  },
-  controls: {
-    marginTop: '1rem',
-    display: 'flex',
-    justifyContent: 'space-between'
-  }
 };
 
 export default MicroSim;
