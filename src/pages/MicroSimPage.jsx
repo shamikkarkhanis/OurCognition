@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react'; // Add useEffect import
+import React, { useState, useEffect } from 'react';
 import MicroSim from '../components/common/MicroSim.jsx';
 import MicroSynapse from '../components/common/MicroSynapse.jsx';
 
 export default function MicroSimPage() {
   const [currentStage, setCurrentStage] = useState(0);
+  const [animationKey, setAnimationKey] = useState(0);
 
-  // This useEffect is correctly imported now
+  // Update animationKey every time the stage changes
   useEffect(() => {
-    // Reset animation when stage changes
-    const timer = setTimeout(() => {
-      setCurrentStage(prev => prev);
-    }, 50);
-    
-    return () => clearTimeout(timer);
+    setAnimationKey(prev => prev + 1);
   }, [currentStage]);
 
   return (
@@ -20,7 +16,7 @@ export default function MicroSimPage() {
       <div style={styles.contentContainer}>
         <div style={styles.leftPane}>
           <div style={styles.card}>
-            <MicroSynapse stage={currentStage} />
+            <MicroSynapse stage={currentStage} key={animationKey} />
           </div>
         </div>
 
@@ -33,7 +29,6 @@ export default function MicroSimPage() {
     </div>
   );
 }
-
 const styles = {
   container: {
     backgroundColor: '#0f0f0f',
@@ -63,8 +58,8 @@ const styles = {
     borderRadius: '12px',
     padding: '2rem',
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
-    minHeight: '300px', 
-    minWidth: '100%',    
-    margin: '1rem' ,
+    minHeight: '300px',
+    minWidth: '100%',
+    margin: '1rem',
   }
 };
