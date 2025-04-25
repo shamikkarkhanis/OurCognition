@@ -1,0 +1,76 @@
+/* content_timeline.css */
+
+.timeline-wrapper {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.timeline-track {
+    position: relative;
+    height: 40px;
+    background: #1C1C1E;
+    border-radius: 20px;
+    align-items: center;
+    padding: 0 10px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.timeline-stage {
+    position: relative;
+    flex: 1;
+    height: 100%;
+}
+
+.timeline-tick {
+    position: absolute;
+    top: 50%;
+    width: 2px;
+    height: 20px;
+    background: #999;
+    transform: translateY(-50%);
+}
+
+.timeline-tick.major {
+    left: 0;
+    height: 28px;
+    width: 10px;
+    border-radius: 5px;
+    background: #783cf0;
+}
+
+.timeline-tick.major:hover {
+    height: 32px;
+    background: #8b45f3;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.timeline-tick.minor {
+    height: 12px;
+    background: #888;
+}
+
+
+.timeline-tick.major:hover {
+    height: 32px;
+    background: #8b45f3;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.timeline-indicator {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 28px;
+    background: #ff4d4f;
+    border-radius: 2px;
+    pointer-events: none;
+    transition: transform 0.05s linear;
+}

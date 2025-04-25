@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { hslToRgb } from '../utils/colorUtils';
 import '../../styles/BrainHeatmap.css';
 import brainRegionsBase from '../common/BrainRegionsBase.jsx'
-import alzheimersRegionData from "../common/AlzheimersRegionsData";
+import alzheimersRegionData from "../info/AlzheimersRegionsData";
 
 /**
  * BrainMap - Interactive brain region visualization component

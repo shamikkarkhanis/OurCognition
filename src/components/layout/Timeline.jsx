@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/Timeline.css';
-import alzheimersEvents from '../common/AlzheimersEvents.jsx';
+import alzheimersEvents from '../info/AlzheimersEvents.jsx';
 
 /**
  * Timeline Component

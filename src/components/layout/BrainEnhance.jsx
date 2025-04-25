@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/Timeline.css';
 
-import AlzheimersRegionsData from '../common/AlzheimersRegionsData.jsx';
+import AlzheimersRegionsData from '../info/AlzheimersRegionsData.jsx';
 
 //* this is a panel appearing over timeline describing onclicked region
 
