@@ -92,22 +92,32 @@ const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisite
                     </ul>
                 </div>
 
-                {/* Source bubbles */}
-                <div className="source-bubbles">
-                    {currentEvent.sources?.map((src, index) => (
-                        <a
-                            key={index}
-                            href={src}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="source-dot"
-                            title={`Source ${index + 1}`}
-                        />
-                    ))}
+
+                <div className="source-container">
+                    <p className="source-title">Sources</p>
+                    <div className="source-bubbles">
+                        {currentEvent.sources?.map((src, index) => (
+                            <a
+                                key={index}
+                                href={src}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="source-dot"
+                                title={`Source ${index + 1}`}
+                            />
+                        ))}
+                    </div>
                 </div>
+
+
+
             </div>
 
+            {/* Source bubbles */}
+
+
             <div className="timeline-buttons">
+
                 <button onClick={handleBack} className="back-button" style={{ backgroundColor: (currentIndex > 0 && events.length > 0) ? '#4a56e2' : '#888' }}>
                     ← Back
                 </button>
@@ -117,6 +127,7 @@ const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisite
                 <button onClick={handleNext} className="next-button">
                     Next →
                 </button>
+
             </div>
         </div>
     );
