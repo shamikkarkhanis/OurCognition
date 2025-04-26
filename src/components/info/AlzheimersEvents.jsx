@@ -1,9 +1,9 @@
 import React from 'react';
-import preclinicalStageEvents from './PreclinicalStageEvents';
-import mciStageEvents from './MCIStageEvents';
-import milddementiaStageEvents from './MilddementiaStageEvents';
-import moderatedementiaStageEvents from './ModeratedementiaStageEvents';
-import severedementiaStageEvents from './SeveredementiaStageEvents';
+import preclinicalStageEvents from './stages/PreclinicalStageEvents';
+import mciStageEvents from './stages/MCIStageEvents';
+import milddementiaStageEvents from './stages/MilddementiaStageEvents';
+import moderatedementiaStageEvents from './stages/ModeratedementiaStageEvents';
+import severedementiaStageEvents from './stages/SeveredementiaStageEvents';
 
 // Alzheimer's timeline data
 const alzheimersEvents = [

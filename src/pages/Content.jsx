@@ -13,6 +13,7 @@ import BrainMap from '../components/layout/BrainHeatmap';
 import Timeline from '../components/layout/Timeline';
 import '../styles/Content.css';
 import BrainEnhance from '../components/layout/BrainEnhance';
+import ContentTimeline from '../components/layout/ContentTimeline';
 
 /**
  * Content component renders the main visualization area including brain heatmap and timeline
@@ -71,6 +72,12 @@ function Content() {
                     )}
                 </div>
             </div>
+
+            <div className="timeline-container">
+                <ContentTimeline
+                    lastVisitedIndex={lastVisitedIndex} />
+            </div>
+
         </div>
     );
 }
