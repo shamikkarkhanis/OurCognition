@@ -74,3 +74,24 @@
     pointer-events: none;
     transition: transform 0.05s linear;
 }
+
+.current-label {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    background-color: #7c3aed;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.timeline-tick.minor.minor-current {
+    background-color: orange;
+    border-color: orange;
+    width: 6px;
+    border-radius: 100%;
+}

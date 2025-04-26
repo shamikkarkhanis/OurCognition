@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import '../../styles/ContentTimeline.css';
 import mciStageEvents from '../info/stages/MCIStageEvents';
 import milddementiaStageEvents from '../info/stages/MilddementiaStageEvents';
@@ -6,7 +6,7 @@ import moderatedementiaStageEvents from '../info/stages/ModeratedementiaStageEve
 import preclinicalStageEvents from '../info/stages/PreclinicalStageEvents';
 import severedementiaStageEvents from '../info/stages/SeveredementiaStageEvents';
 
-const ContentTimeline = React.memo(({ }) => {
+const ContentTimeline = React.memo(({ lastVisitedIndex }) => {
     const trackRef = useRef(null);
 
     const stages = [
@@ -17,24 +17,24 @@ const ContentTimeline = React.memo(({ }) => {
         severedementiaStageEvents
     ];
 
-    // Create and manage tooltips for brain regions
+    // compute starting global index of each stage
+    const stageStartIndices = [];
+    let acc = 0;
+    for (const evts of stages) {
+        stageStartIndices.push(acc);
+        acc += evts.length;
+    }
+
     const handleMouseEnter = (e, stageName) => {
         const tooltip = document.createElement('div');
         tooltip.className = 'brain-tooltip';
-
-        tooltip.innerHTML = `
-      <div class="tooltip-title">${stageName}</div>
-    `;
-
+        tooltip.innerHTML = `<div class="tooltip-title">${stageName}</div>`;
         tooltip.style.position = 'absolute';
         tooltip.style.left = `${e.clientX + 12}px`;
         tooltip.style.top = `${e.clientY + 12}px`;
         tooltip.style.zIndex = '9999';
         tooltip.style.pointerEvents = 'none';
-
         document.body.appendChild(tooltip);
-
-        // Store reference so we can remove it later
         e.target._tooltip = tooltip;
     };
 
@@ -45,38 +45,44 @@ const ContentTimeline = React.memo(({ }) => {
         }
     };
 
-
     return (
         <div className="timeline-wrapper">
-            <div
-                ref={trackRef}
-                className="timeline-track"
-            >
-                {stages.map((stageEvents, stageIdx) => (
-                    <div key={stageIdx} className="timeline-stage">
-                        {/* Major tick for the stage */}
-                        <div
-                            className="timeline-tick major"
-                            onMouseEnter={(e) => handleMouseEnter(e, stageEvents[0]?.title || "Stage")} // Pass event and name
-                            onMouseLeave={handleMouseLeaveToolTip}
-                        />
-
-                        {/* Minor ticks for each event */}
-                        {stageEvents.map((_, eventIdx) => (
+            <div ref={trackRef} className="timeline-track">
+                {stages.map((stageEvents, stageIdx) => {
+                    const stageStart = stageStartIndices[stageIdx];
+                    return (
+                        <div key={stageIdx} className="timeline-stage">
                             <div
-                                key={eventIdx}
-                                className="timeline-tick minor"
-                                style={{
-                                    left: `${(eventIdx + 1) * (100 / (stageEvents.length + 1))}%`
-                                }}
+                                className="timeline-tick major"
+                                onMouseEnter={(e) =>
+                                    handleMouseEnter(e, stageEvents[0]?.title || 'Stage')
+                                }
+                                onMouseLeave={handleMouseLeaveToolTip}
                             />
-                        ))}
-                    </div>
-                ))}
+                            {stageEvents.map((_, eventIdx) => {
+                                const globalEventIdx = stageStart + eventIdx;
+                                const isCurrent = globalEventIdx === lastVisitedIndex;
+                                return (
+                                    <div
+                                        key={eventIdx}
+                                        className={`timeline-tick minor${isCurrent ? ' minor-current' : ''}`}
+                                        style={{
+                                            left: `${((eventIdx + 1) * 100) / (stageEvents.length + 1)}%`
+                                        }}
+                                        onMouseEnter={(e) =>
+                                            handleMouseEnter(e, stageEvents[eventIdx]?.title || 'Event')
+                                        }
+                                        onMouseLeave={handleMouseLeaveToolTip}
+                                    >
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
-
 });
 
 export default ContentTimeline;
