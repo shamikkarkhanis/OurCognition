@@ -1,4 +1,11 @@
-/* content_timeline.css */
+/* ContentTimeline.css */
+
+/* allow labels to peek out */
+.timeline-wrapper,
+.timeline-track,
+.timeline-stage {
+    overflow: visible;
+}
 
 .timeline-wrapper {
     width: 100%;
@@ -7,16 +14,14 @@
 
 .timeline-track {
     position: relative;
-    height: 40px;
-    background: #1C1C1E;
-    border-radius: 20px;
-    align-items: center;
-    padding: 0 10px;
-    overflow: hidden;
-    cursor: pointer;
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
+    height: 40px;
+    padding: 0 10px;
+    background: #1C1C1E;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
 .timeline-stage {
@@ -25,28 +30,28 @@
     height: 100%;
 }
 
+/* highlight whole current stage */
+.timeline-stage.current-stage {
+    background: rgba(255, 165, 0, 0.1);
+    border-radius: 20px;
+}
+
+/* ticks */
 .timeline-tick {
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     width: 2px;
     height: 20px;
     background: #999;
-    transform: translateY(-50%);
 }
 
 .timeline-tick.major {
     left: 0;
-    height: 28px;
     width: 10px;
-    border-radius: 5px;
+    height: 28px;
+    border-radius: 4px;
     background: #783cf0;
-}
-
-.timeline-tick.major:hover {
-    height: 32px;
-    background: #8b45f3;
-    transition: all 0.2s ease;
-    cursor: pointer;
 }
 
 .timeline-tick.minor {
@@ -54,44 +59,27 @@
     background: #888;
 }
 
-
-.timeline-tick.major:hover {
-    height: 32px;
-    background: #8b45f3;
-    transition: all 0.2s ease;
-    cursor: pointer;
+.timeline-tick.minor.minor-current {
+    width: 6px;
+    height: 6px;
+    background: orange;
+    border: 1px solid orange;
+    border-radius: 50%;
 }
 
-.timeline-indicator {
+/* label under the current stage */
+.stage-name-label {
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 28px;
-    background: #ff4d4f;
-    border-radius: 2px;
-    pointer-events: none;
-    transition: transform 0.05s linear;
-}
-
-.current-label {
-    position: absolute;
-    top: -20px;
+    bottom: -2rem;
+    /* pull it just below the bar */
     left: 50%;
     transform: translateX(-50%);
-    font-size: 12px;
-    background-color: #7c3aed;
-    color: white;
+    z-index: 10;
+    background: rgba(255, 165, 0, 0.2);
+    color: #fff;
     padding: 2px 6px;
-    border-radius: 6px;
-    white-space: nowrap;
+    border-radius: 4px;
+    font-size: 15px;
     pointer-events: none;
-}
-
-.timeline-tick.minor.minor-current {
-    background-color: orange;
-    border-color: orange;
-    width: 6px;
-    border-radius: 100%;
+    white-space: nowrap;
 }

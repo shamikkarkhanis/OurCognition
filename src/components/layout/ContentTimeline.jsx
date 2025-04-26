@@ -1,88 +1,66 @@
-import React, { useRef } from 'react';
-import '../../styles/ContentTimeline.css';
-import mciStageEvents from '../info/stages/MCIStageEvents';
-import milddementiaStageEvents from '../info/stages/MilddementiaStageEvents';
-import moderatedementiaStageEvents from '../info/stages/ModeratedementiaStageEvents';
-import preclinicalStageEvents from '../info/stages/PreclinicalStageEvents';
-import severedementiaStageEvents from '../info/stages/SeveredementiaStageEvents';
+// ContentTimeline.jsx
+import React, { useRef } from 'react'
+import preclinical from '../info/stages/PreclinicalStageEvents'
+import mci from '../info/stages/MCIStageEvents'
+import mild from '../info/stages/MilddementiaStageEvents'
+import mod from '../info/stages/ModeratedementiaStageEvents'
+import severe from '../info/stages/SeveredementiaStageEvents'
+import '../../styles/ContentTimeline.css'
 
-const ContentTimeline = React.memo(({ lastVisitedIndex }) => {
-    const trackRef = useRef(null);
+export default function ContentTimeline({ lastVisitedIndex }) {
+    const trackRef = useRef(null)
 
-    const stages = [
-        preclinicalStageEvents,
-        mciStageEvents,
-        milddementiaStageEvents,
-        moderatedementiaStageEvents,
-        severedementiaStageEvents
-    ];
+    const stages = [preclinical, mci, mild, mod, severe]
 
-    // compute starting global index of each stage
-    const stageStartIndices = [];
-    let acc = 0;
+    // compute the starting global index of each stage
+    const stageStart = [];
+    let acc = 1;
     for (const evts of stages) {
-        stageStartIndices.push(acc);
+        stageStart.push(acc);
         acc += evts.length;
     }
-
-    const handleMouseEnter = (e, stageName) => {
-        const tooltip = document.createElement('div');
-        tooltip.className = 'brain-tooltip';
-        tooltip.innerHTML = `<div class="tooltip-title">${stageName}</div>`;
-        tooltip.style.position = 'absolute';
-        tooltip.style.left = `${e.clientX + 12}px`;
-        tooltip.style.top = `${e.clientY + 12}px`;
-        tooltip.style.zIndex = '9999';
-        tooltip.style.pointerEvents = 'none';
-        document.body.appendChild(tooltip);
-        e.target._tooltip = tooltip;
-    };
-
-    const handleMouseLeaveToolTip = (e) => {
-        if (e.target._tooltip) {
-            e.target._tooltip.remove();
-            e.target._tooltip = null;
-        }
-    };
 
     return (
         <div className="timeline-wrapper">
             <div ref={trackRef} className="timeline-track">
-                {stages.map((stageEvents, stageIdx) => {
-                    const stageStart = stageStartIndices[stageIdx];
+                {stages.map((evtSlice, sidx) => {
+                    const start = stageStart[sidx]
+                    const end = start + evtSlice.length - 1
+                    const current = lastVisitedIndex >= start && lastVisitedIndex <= end
+
                     return (
-                        <div key={stageIdx} className="timeline-stage">
-                            <div
-                                className="timeline-tick major"
-                                onMouseEnter={(e) =>
-                                    handleMouseEnter(e, stageEvents[0]?.title || 'Stage')
-                                }
-                                onMouseLeave={handleMouseLeaveToolTip}
-                            />
-                            {stageEvents.map((_, eventIdx) => {
-                                const globalEventIdx = stageStart + eventIdx;
-                                const isCurrent = globalEventIdx === lastVisitedIndex;
+                        <div
+                            key={sidx}
+                            className={`timeline-stage${current ? ' current-stage' : ''}`}
+                        >
+                            {/* stage tick */}
+                            <div className="timeline-tick major" />
+
+                            {/* minor ticks */}
+                            {evtSlice.map((_, eidx) => {
+                                const glob = start + eidx
+                                const isNow = glob === lastVisitedIndex
                                 return (
                                     <div
-                                        key={eventIdx}
-                                        className={`timeline-tick minor${isCurrent ? ' minor-current' : ''}`}
+                                        key={eidx}
+                                        className={`timeline-tick minor${isNow ? ' minor-current' : ''}`}
                                         style={{
-                                            left: `${((eventIdx + 1) * 100) / (stageEvents.length + 1)}%`
+                                            left: `${((eidx + 1) * 100) / (evtSlice.length + 1)}%`
                                         }}
-                                        onMouseEnter={(e) =>
-                                            handleMouseEnter(e, stageEvents[eventIdx]?.title || 'Event')
-                                        }
-                                        onMouseLeave={handleMouseLeaveToolTip}
-                                    >
-                                    </div>
-                                );
+                                    />
+                                )
                             })}
+
+                            {/* only render label under the *current* stage */}
+                            {current && (
+                                <div className="stage-name-label">
+                                    {evtSlice[0].title}
+                                </div>
+                            )}
                         </div>
-                    );
+                    )
                 })}
             </div>
         </div>
-    );
-});
-
-export default ContentTimeline;
+    )
+}
