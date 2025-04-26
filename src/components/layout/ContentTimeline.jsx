@@ -6,9 +6,8 @@ import moderatedementiaStageEvents from '../info/stages/ModeratedementiaStageEve
 import preclinicalStageEvents from '../info/stages/PreclinicalStageEvents';
 import severedementiaStageEvents from '../info/stages/SeveredementiaStageEvents';
 
-export default function CursorControlledTimeline() {
+const ContentTimeline = React.memo(({ }) => {
     const trackRef = useRef(null);
-    const indicatorRef = useRef(null);
 
     const stages = [
         preclinicalStageEvents,
@@ -18,35 +17,49 @@ export default function CursorControlledTimeline() {
         severedementiaStageEvents
     ];
 
+    // Create and manage tooltips for brain regions
+    const handleMouseEnter = (e, stageName) => {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'brain-tooltip';
 
-    const handleMouseMove = (e) => {
-        const track = trackRef.current;
-        if (!track || !indicatorRef.current) return;
+        tooltip.innerHTML = `
+      <div class="tooltip-title">${stageName}</div>
+    `;
 
-        const rect = track.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const clamped = Math.max(0, Math.min(rect.width, x));
-        indicatorRef.current.style.transform = `translateX(${clamped}px) translateY(-50%)`;
+        tooltip.style.position = 'absolute';
+        tooltip.style.left = `${e.clientX + 12}px`;
+        tooltip.style.top = `${e.clientY + 12}px`;
+        tooltip.style.zIndex = '9999';
+        tooltip.style.pointerEvents = 'none';
+
+        document.body.appendChild(tooltip);
+
+        // Store reference so we can remove it later
+        e.target._tooltip = tooltip;
     };
 
-    const handleMouseLeave = () => {
-        const track = trackRef.current;
-        if (!track || !indicatorRef.current) return;
-
+    const handleMouseLeaveToolTip = (e) => {
+        if (e.target._tooltip) {
+            e.target._tooltip.remove();
+            e.target._tooltip = null;
+        }
     };
+
 
     return (
         <div className="timeline-wrapper">
             <div
                 ref={trackRef}
                 className="timeline-track"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
             >
                 {stages.map((stageEvents, stageIdx) => (
                     <div key={stageIdx} className="timeline-stage">
                         {/* Major tick for the stage */}
-                        <div className="timeline-tick major" />
+                        <div
+                            className="timeline-tick major"
+                            onMouseEnter={(e) => handleMouseEnter(e, stageEvents[0]?.title || "Stage")} // Pass event and name
+                            onMouseLeave={handleMouseLeaveToolTip}
+                        />
 
                         {/* Minor ticks for each event */}
                         {stageEvents.map((_, eventIdx) => (
@@ -60,8 +73,10 @@ export default function CursorControlledTimeline() {
                         ))}
                     </div>
                 ))}
-                <div ref={indicatorRef} className="timeline-indicator" />
             </div>
         </div>
     );
-}
+
+});
+
+export default ContentTimeline;
