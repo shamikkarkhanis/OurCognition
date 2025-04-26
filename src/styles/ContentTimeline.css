@@ -1,15 +1,8 @@
 /* ContentTimeline.css */
 
-/* allow labels to peek out */
-.timeline-wrapper,
-.timeline-track,
-.timeline-stage {
-    overflow: visible;
-}
-
 .timeline-wrapper {
     width: 100%;
-    padding-top: 20px;
+    padding: 1rem 0;
 }
 
 .timeline-track {
@@ -17,69 +10,106 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
-    padding: 0 10px;
-    background: #1C1C1E;
-    border-radius: 20px;
-    cursor: pointer;
+    height: 3rem;
+    background: #1c1c1e;
+    border-radius: 1.5rem;
+    padding: 0 0.5rem;
+    overflow: visible;
+    /* allow labels to pop out */
 }
 
 .timeline-stage {
     position: relative;
+    /* for the label */
     flex: 1;
     height: 100%;
 }
 
-/* highlight whole current stage */
+/* highlight the entire current stage */
 .timeline-stage.current-stage {
     background: rgba(255, 165, 0, 0.1);
-    border-radius: 20px;
+    border-radius: 1.5rem;
 }
 
-/* ticks */
-.timeline-tick {
+/* major tick (stage boundary) */
+.timeline-tick.major {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0.625rem;
+    height: 1.75rem;
+    background: #783cf0;
+    border-radius: 0.3125rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.timeline-tick.major:hover {
+    height: 2rem;
+    background: #8b45f3;
+}
+
+/* minor tick (events) */
+.timeline-tick.minor {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    width: 2px;
-    height: 20px;
-    background: #999;
-}
-
-.timeline-tick.major {
-    left: 0;
-    width: 10px;
-    height: 28px;
-    border-radius: 4px;
-    background: #783cf0;
-}
-
-.timeline-tick.minor {
-    height: 12px;
+    width: 0.125rem;
+    height: 1rem;
     background: #888;
+    transform: translateY(-50%);
 }
 
+/* current event tick */
 .timeline-tick.minor.minor-current {
-    width: 6px;
-    height: 6px;
-    background: orange;
-    border: 1px solid orange;
+    background-color: orange;
+    width: 0.375rem;
+    height: 0.875rem;
     border-radius: 50%;
 }
 
-/* label under the current stage */
+/* indicator bar (if you’re using one) */
+.timeline-indicator {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 0.25rem;
+    height: 1.75rem;
+    background: #ff4d4f;
+    border-radius: 0.125rem;
+    pointer-events: none;
+    transition: transform 0.05s linear;
+}
+
+/* label under current stage */
 .stage-name-label {
     position: absolute;
-    bottom: -2rem;
-    /* pull it just below the bar */
+    top: 100%;
+    /* sit immediately below the bar */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10;
-    background: rgba(255, 165, 0, 0.2);
+    margin-top: 0.25rem;
+    z-index: 2;
+    max-width: 80vw;
+    background: rgba(255, 165, 0, 0.25);
     color: #fff;
-    padding: 2px 6px;
-    border-radius: 10px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.3125rem;
     font-size: 15px;
-    pointer-events: none;
+    font-weight: 500;
+    text-align: center;
     white-space: nowrap;
+    word-break: break-word;
+    pointer-events: none;
+}
+
+/* mobile tweaks */
+@media (max-width: 600px) {
+    .stage-name-label {
+        font-size: 0.7rem;
+        max-width: 60vw;
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+    }
 }
