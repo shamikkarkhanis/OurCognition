@@ -58,7 +58,7 @@ const BrainEnhance = React.memo(({ enhancedRegion, setEnhancedRegion }) => {
                 <div className="source-container">
                     <p className="source-title">Sources</p>
                     <div className="source-bubbles">
-                        {currentEvent.sources?.map((src, index) => (
+                        {data.sources?.map((src, index) => (
                             <a
                                 key={index}
                                 href={src}
