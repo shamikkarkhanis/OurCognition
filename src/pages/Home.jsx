@@ -8,6 +8,7 @@ function Home() {
   return (
     <>
       <HeroSection />
+      <About />
       <Cards />
     </>
   );

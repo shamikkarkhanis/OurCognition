@@ -1,89 +1,86 @@
-// Content.jsx
+/**
+ * Content Component
+ * 
+ * Main container component that displays brain visualization and timeline interface
+ * for different neurological conditions.
+ * 
+ * @module Content
+ */
 
-import { useState, useRef } from 'react';
-import ContentNavbar from '../components/layout/ContentNavbar.jsx';
-import BrainHeatmap from '../components/common/BrainHeatmap.jsx';
-import Timeline from '../components/layout/Timeline.jsx';
+import { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import BrainMap from '../components/layout/BrainHeatmap';
+import Timeline from '../components/layout/Timeline';
+import '../styles/Content.css';
+import BrainEnhance from '../components/layout/BrainEnhance';
+import ContentTimeline from '../components/layout/ContentTimeline';
 
-
+/**
+ * Content component renders the main visualization area including brain heatmap and timeline
+ * 
+ * @returns {JSX.Element} Rendered component
+ */
 function Content() {
-    const [selection, setSelection] = useState('alzheimers');
 
+    // Track active brain region for highlighting
     const [activeRegion, setActiveRegion] = useState(null);
+
+    // Store multiple active regions with their activation values
     const [activeRegions, setActiveRegions] = useState({});
-    const undulationIntervalId = useRef(null);
 
-    // Function to start undulating color shades
-    const undulateRegion = (regionId) => {
-        // Stop undulation for the currently active region, if any
-        if (activeRegion) {
-            setActiveRegions((prev) => ({ ...prev, [activeRegion]: 0 })); // Reset the previous region's activity
-            if (undulationIntervalId.current) {
-                clearInterval(undulationIntervalId.current); // Clear the interval for the previous region
-            }
-        }
+    // Store region to show enhanced description
+    const [enhancedRegion, setEnhancedRegion] = useState(null);
 
-        // Set the new active region
-        setActiveRegion(regionId);
+    // Store last visited index
+    const [lastVisitedIndex, setLastVisitedIndex] = useState(0);
 
-        // Start undulation for the new region
-        const intervalTime = 100; // Time between each shade change (ms)
-        const newIntervalId = setInterval(() => {
-            setActiveRegions((prev) => {
-                const currentActivity = (prev[regionId] || 0) + 7;
-                return { ...prev, [regionId]: currentActivity % 100 };
-            });
-        }, intervalTime);
-
-        // Store the new interval ID in the ref
-        undulationIntervalId.current = newIntervalId;
+    // Handle region selection
+    const handleRegionSelect = (region) => {
+        setActiveRegion(region);
     };
 
-    return (
-        <div style={styles.container}>
-            <ContentNavbar setSelection={setSelection} />
-            <div style={styles.content}>
-                <div style={styles.heatmapContainer}>
-                    <BrainHeatmap
-                        selection={selection}
-                        undulateRegion={undulateRegion}
-                        activeRegions={activeRegions} />
-                </div>
-                <div style={styles.timelineContainer}>
-                    <Timeline
-                        selection={selection}
-                        triggerUndulation={undulateRegion} />
+    // Handle region click to enhance description
+    const handleEnhanceRegion = (region) => {
+        setEnhancedRegion(region);
+    }
 
+    return (
+        <div className="content-root">
+            <div className="content-body">
+                <div className="sim-container">
+                    <BrainMap
+                        selectedRegions={activeRegions}
+                        onRegionSelect={handleRegionSelect}
+                        activeRegion={activeRegion}
+                        enhanceRegion={handleEnhanceRegion}
+                    />
+                </div>
+                <div className="description-container">
+
+                    {enhancedRegion ? (
+                        <BrainEnhance
+                            enhancedRegion={enhancedRegion}
+                            setEnhancedRegion={setEnhancedRegion}
+                        />
+                    ) : (
+                        <Timeline
+                            setActiveRegions={setActiveRegions}
+                            activeRegion={activeRegion}
+                            lastVisitedIndex={lastVisitedIndex}
+                            setLastVisitedIndex={setLastVisitedIndex}
+                        />
+                    )}
                 </div>
             </div>
+
+            <div className="timeline-container">
+                <ContentTimeline
+                    lastVisitedIndex={lastVisitedIndex}
+                    setLastVisitedIndex={setLastVisitedIndex} />
+            </div>
+
         </div>
     );
 }
-
-const styles = {
-    container: {
-        padding: '20px',
-        minHeight: '100vh',
-        backgroundColor: '#0f0f0f',
-        color: 'white',
-    },
-    content: {
-        display: 'flex',
-        gap: '20px',
-        marginTop: '20px',
-    },
-    heatmapContainer: {
-        flex: '1',
-        backgroundColor: '#1c1c1e',
-        borderRadius: '10px',
-        padding: '20px',
-    },
-    timelineContainer: {
-        flex: '1',
-        backgroundColor: '#1c1c1e',
-        borderRadius: '10px',
-        padding: '20px',
-    },
-};
 
 export default Content;

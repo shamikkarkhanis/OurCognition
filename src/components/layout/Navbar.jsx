@@ -3,50 +3,66 @@ import { Link } from 'react-router-dom';
 import '../../styles/Navbar.css';
 
 function Navbar() {
-  const [click, setClick] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Prevent body scroll when menu is open on mobile
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
+  }, [isMenuOpen]);
 
   return (
-    <>
-      <nav className='navbar'>
-        <div className='navbar-container'>
-          {/* Logo stays on the left */}
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-          </Link>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-container">
+        <button
+          className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}
+          onClick={toggleMenu}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMenuOpen}
+        >
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </button>
 
-          {/* Hamburger menu icon for mobile */}
-          <div className='menu-icon' onClick={handleClick}>
-            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-          </div>
+        <div className={`nav-overlay ${isMenuOpen ? 'active' : ''}`} onClick={closeMenu} />
 
-          {/* Navbar Items - Aligned to the right */}
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                Home
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/content' className='nav-links' onClick={closeMobileMenu}>
-                Content
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
-                About Us
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/contact' className='nav-links' onClick={closeMobileMenu}>
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </>
+        <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+          <li className="nav-item">
+            <Link to="/" className="nav-link" onClick={closeMenu}>
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/content" className="nav-link" onClick={closeMenu}>
+              Content
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/contact" className="nav-link" onClick={closeMenu}>
+              Contact
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 }
 
