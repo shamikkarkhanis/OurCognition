@@ -34,21 +34,18 @@
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.hero-container>p {
+.hero-container {
   margin-top: 8px;
   color: #ffffff;
   font-size: 32px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-align: center;
-  /* Center the paragraph text */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* Button Styling */
 .hero-btns {
   margin-top: 32px;
   border-radius: 8px;
-  color: #000000;
   display: flex;
   justify-content: center;
   /* Center the buttons */
@@ -57,8 +54,7 @@
 .hero-btns .btn {
   margin: 6px;
   border-radius: 8px;
-  /*color: #ffffff; */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
 }
 
 .fa-play-circle {
