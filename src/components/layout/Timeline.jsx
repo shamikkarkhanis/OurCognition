@@ -13,6 +13,9 @@ const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisite
     const events = alzheimersEvents;
 
     useEffect(() => {
+        if (events.length > 0) {
+            updateActiveRegions(events[lastVisitedIndex].brain_region);
+        }
         setCurrentIndex(lastVisitedIndex);
     }, [lastVisitedIndex]);
 
