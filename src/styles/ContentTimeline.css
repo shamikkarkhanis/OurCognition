@@ -23,6 +23,13 @@
     /* for the label */
     flex: 1;
     height: 100%;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.timeline-stage:hover {
+    background: rgba(255, 165, 0, 0.1);
+    border-radius: 1.5rem;
 }
 
 /* highlight the entire current stage */
