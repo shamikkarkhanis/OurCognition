@@ -54,26 +54,29 @@ const BrainEnhance = React.memo(({ enhancedRegion, setEnhancedRegion }) => {
                         ))}
                     </ul>
                 </div>
+
+                <div className="source-container">
+                    <p className="source-title">Sources</p>
+                    <div className="source-bubbles">
+                        {currentEvent.sources?.map((src, index) => (
+                            <a
+                                key={index}
+                                href={src}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="source-dot"
+                                title={`Source ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
             </div>
 
             <div className="timeline-buttons">
                 <button onClick={handleBack} className="back-button">
                     ← Back
                 </button>
-
-                {/* Source bubbles */}
-                <div className="source-bubbles">
-                    {data.sources?.map((src, index) => (
-                        <a
-                            key={index}
-                            href={src}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="source-dot"
-                            title={`Source ${index + 1}`}
-                        />
-                    ))}
-                </div>
             </div>
         </div>
     );

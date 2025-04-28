@@ -13,10 +13,9 @@ const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisite
     const events = alzheimersEvents;
 
     useEffect(() => {
-        if (events.length > 0) {
-            updateActiveRegions(events[currentIndex].brain_region);
-        }
-    }, [currentIndex]);
+        setCurrentIndex(lastVisitedIndex);
+    }, [lastVisitedIndex]);
+
 
     const updateActiveRegions = (regions) => {
         setActiveRegions({});
@@ -59,7 +58,7 @@ const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisite
         <div className="timeline-container">
             <div className="timeline-header">
                 <h2 className="timeline-title">{currentEvent.title}</h2>
-                <div className="stage-progress">{currentIndex + 1}/{events.length}</div>
+                <div className="stage-progress">{lastVisitedIndex + 1}/{events.length}</div>
             </div>
 
             <div className="timeline-content">
@@ -112,8 +111,6 @@ const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisite
 
 
             </div>
-
-            {/* Source bubbles */}
 
 
             <div className="timeline-buttons">

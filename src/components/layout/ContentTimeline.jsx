@@ -11,7 +11,7 @@ export default function ContentTimeline({ lastVisitedIndex, setLastVisitedIndex 
     const trackRef = useRef(null)
     const [hoveredStageIndex, setHoveredStageIndex] = useState(null);
 
-    const stages = [preclinical, mci, mild, mod, severe]
+    const stages = [preclinical, mci, mild, mod, severe];
 
     // compute the starting global index of each stage
     const stageStart = [];
@@ -20,6 +20,7 @@ export default function ContentTimeline({ lastVisitedIndex, setLastVisitedIndex 
         stageStart.push(acc);
         acc += evts.length;
     }
+
 
     return (
         <div className="timeline-wrapper">
@@ -35,7 +36,9 @@ export default function ContentTimeline({ lastVisitedIndex, setLastVisitedIndex 
                             className={`timeline-stage${current ? ' current-stage' : ''}`}
                             onMouseEnter={() => setHoveredStageIndex(sidx)}
                             onMouseLeave={() => setHoveredStageIndex(null)}
-                            onClick={() => setLastVisitedIndex(stageStart[sidx])}
+                            onClick={() => {
+                                setLastVisitedIndex(stageStart[sidx]);
+                            }}
                         >
                             {/* stage tick */}
                             <div className="timeline-tick major" />
@@ -65,6 +68,6 @@ export default function ContentTimeline({ lastVisitedIndex, setLastVisitedIndex 
                     )
                 })}
             </div>
-        </div>
+        </div >
     )
 }
