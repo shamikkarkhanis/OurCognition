@@ -75,7 +75,8 @@ function Content() {
 
             <div className="timeline-container">
                 <ContentTimeline
-                    lastVisitedIndex={lastVisitedIndex} />
+                    lastVisitedIndex={lastVisitedIndex}
+                    setLastVisitedIndex={setLastVisitedIndex} />
             </div>
 
         </div>

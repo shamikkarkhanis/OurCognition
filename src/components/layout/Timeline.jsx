@@ -53,7 +53,7 @@ const Timeline = ({ selection, setActiveRegions, lastVisitedIndex, setLastVisite
         setActiveRegions({});
     };
 
-    const currentEvent = events[currentIndex];
+    const currentEvent = events[lastVisitedIndex];
 
     return (
         <div className="timeline-container">
