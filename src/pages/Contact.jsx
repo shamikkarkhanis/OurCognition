@@ -24,7 +24,7 @@ export default function Contact() {
             </div>
             <div className="contributor-card">
               <h3>Nico Diaz</h3>
-              <p>ndiaz@rpi.edu</p>
+              <p>diazn@rpi.edu</p>
 
             </div>
             <div className="contributor-card">
